@@ -1,0 +1,34 @@
+{
+    "name": "mine",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "client": "webpack --config webpack.client.conf.js",
+        "build": "rm -rf ./dist && webpack --config webpack.client.conf.js && webpack --config webpack.server.conf.js",
+        "start": "nodemon src/server/index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.16.2",
+        "fs": "^0.0.1-security",
+        "vue": "^2.5.13",
+        "vuex": "^3.0.1",
+        "webpack-hot-middleware": "^2.21.0"
+    },
+    "devDependencies": {
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.2",
+        "css-loader": "^0.28.8",
+        "eventsource-polyfill": "^0.9.6",
+        "html-webpack-plugin": "^2.30.1",
+        "path": "^0.12.7",
+        "vue-loader": "^13.7.0",
+        "vue-server-renderer": "^2.5.13",
+        "vue-template-compiler": "^2.5.13",
+        "webpack": "^3.10.0",
+        "webpack-dev-middleware": "^2.0.4",
+        "webpack-merge": "^4.1.1"
+    }
+}
