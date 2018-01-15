@@ -14,15 +14,15 @@
 <script>
     export default {
         asyncData({store}) {
-            return store.dispatch('fetchBar');
+            return store.dispatch('fetchBar')
         },
         computed: {
             bar() {
-                return this.$store.state.bar;
+                return this.$store.state.bar
             }
         },
         created() {
-            console.log('bar created');
+            console.log('bar created')
         }
     }
 </script>

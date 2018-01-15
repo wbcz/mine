@@ -1,21 +1,10 @@
-// import createApp from './src/client/app'
-
-// const { app, store } = createApp()
-
-// if (window.__INITIAL_STATE__) {
-//     store.replaceState(window.__INITIAL_STATE__);
-// }
-
-// app.$mount('#app')
-
-
 
 import createApp from './src/client/app'
 
-const { app, store } = createApp();
+const { app, store } = createApp()
 
 if (window.__INITIAL_STATE__) {
-    store.replaceState(window.__INITIAL_STATE__);
+    store.replaceState(window.__INITIAL_STATE__)
 }
 
-app.$mount('#app');
+app.$mount('#app')

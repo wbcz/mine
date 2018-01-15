@@ -5,8 +5,8 @@ Vue.use(Vuex)
 
 function fetchBar() {
     return new Promise(function (resolve, reject) {
-        resolve('bar ajax 返回数据');
-    });
+        resolve('bar ajax 返回数据')
+    })
 }
 
 export default function createStore() {
@@ -23,7 +23,7 @@ export default function createStore() {
         },
         mutations: {
             setBar(state, { msg }) {
-                Vue.set(state, 'bar', msg);
+                Vue.set(state, 'bar', msg)
             }
         }
     })
