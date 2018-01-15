@@ -10485,10 +10485,8 @@ module.exports = function normalizeComponent (
 //
 //
 //
-//
-//
 
-// import Foo from './components/Foo.vue';
+
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     data() {
@@ -10497,6 +10495,7 @@ module.exports = function normalizeComponent (
             b: 2
         };
     },
+
     beforeCreate() {
         console.log('App beforeCreate');
     },
@@ -10515,7 +10514,7 @@ module.exports = function normalizeComponent (
         }
     },
     components: {
-        bar1: __WEBPACK_IMPORTED_MODULE_0__components_Bar_vue__["a" /* default */]
+        bar: __WEBPACK_IMPORTED_MODULE_0__components_Bar_vue__["a" /* default */]
     }
 });
 
@@ -10593,10 +10592,6 @@ app.$mount('#app');
 
 
 
-// import Vue from 'vue';
-// import App from './App.vue';
-// import createStore from './store';
-
 /* harmony default export */ __webpack_exports__["a"] = (function () {
     const store = Object(__WEBPACK_IMPORTED_MODULE_2__store_js__["a" /* default */])();
     const app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
@@ -10605,18 +10600,6 @@ app.$mount('#app');
     });
     return { app, store };
 });
-
-// export default () => {
-//     const store = createStore()
-//     const app = new Vue({
-//         store,
-//         render: h => h(App)
-//     })
-//     return {
-//         app,
-//         store
-//     }
-// }
 
 /***/ }),
 /* 10 */
@@ -11131,7 +11114,7 @@ var render = function() {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("bar1", { ref: "bar_ref" })
+      _c("bar", { ref: "bar_ref" })
     ],
     1
   )

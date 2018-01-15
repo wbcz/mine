@@ -4,6 +4,7 @@ const base = require('./webpack.base.conf.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(base, {
+    target: 'node',
     entry: {
         server: './entry-server.js'
     },
