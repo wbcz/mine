@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 function fetchBar() {
     return new Promise(function (resolve, reject) {
+        
         resolve('bar ajax 返回数据')
     })
 }
