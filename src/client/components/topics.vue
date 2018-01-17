@@ -1,8 +1,10 @@
 
 <template>
     <div class='bar'>
-        <h1>Bar2</h1>
-        <p>ajax数据：{{bar}} </p>
+        <h1>CNode.js</h1>
+        <div v-for="topic in topics">
+            <p v-html="topic.content"></p>
+        </div>
     </div>
 </template>
 <style>
@@ -14,11 +16,11 @@
 <script>
     export default {
         asyncData({store}) {
-            return store.dispatch('fetchBar')
+            return store.dispatch('fetchTopics')
         },
         computed: {
-            bar() {
-                return this.$store.state.bar
+            topics() {
+                return this.$store.state.topics
             }
         },
         created() {

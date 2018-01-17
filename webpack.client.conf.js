@@ -7,7 +7,7 @@ const isProd = process.env.NODE_ENV === 'production'
 const express = require('express')
 const app = express()
 
-module.exports = merge(base, {
+const webPackClientConfig = merge(base, {
     entry: {
         client: './entry-client.js'
     },
@@ -29,4 +29,4 @@ module.exports = merge(base, {
 
 // app.listen(8080)
 
-// module.exports = webPackClientConfig
+module.exports = webPackClientConfig
