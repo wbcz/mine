@@ -1,6 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
-import config from './index'
+import config from './index.js'
 
 export default {
     post(url, data) {

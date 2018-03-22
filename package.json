@@ -5,9 +5,11 @@
     "main": "index.js",
     "scripts": {
         "client": "webpack --config webpack.client.conf.js",
-        "build": "rm -rf ./dist && webpack --config webpack.client.conf.js && webpack --config webpack.server.conf.js",
+        "build": "rm -rf ./dist && webpack --config config/webpack/webpack.client.conf.js && webpack --config config/webpack/webpack.server.conf.js",
+        "dev": "docker-compose down --volume && docker-compose up --build",
         "start": "nodemon src/server/index.js",
-        "test": "nodemon src/server.js"
+        "prod": "pm2 start src/server/index.js",
+        "deploy": "scp -r ../mine/.  root@45.76.7.65:/mine/"
     },
     "author": "",
     "license": "ISC",

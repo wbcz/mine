@@ -1,7 +1,7 @@
 
 import Vue from 'vue'
-import App from './src/client/App.vue'
-import createStore from './src/client/store'
+import App from './client/App.vue'
+import createStore from './client/store'
 
 export default function (context) {
     const store = createStore()

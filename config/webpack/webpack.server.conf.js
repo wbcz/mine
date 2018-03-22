@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = merge(base, {
     target: 'node',
     entry: {
-        server: './entry-server.js'
+        server: '../src/entry-server.js'
     },
     output: {
         filename: '[name].js',
@@ -14,7 +14,7 @@ module.exports = merge(base, {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/server/index.html',
+            template: '../src/server/index.html',
             filename: 'index.ssr.html',
             files: {
                 js: "client.js"

@@ -11155,11 +11155,11 @@ module.exports = {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_client_app__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_client_app_js__ = __webpack_require__(17);
 
 
 
-const { app, store } = Object(__WEBPACK_IMPORTED_MODULE_0__src_client_app__["a" /* default */])();
+const { app, store } = Object(__WEBPACK_IMPORTED_MODULE_0__src_client_app_js__["a" /* default */])();
 
 if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__);
@@ -11984,8 +11984,8 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_index__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api_http__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_index_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api_http_js__ = __webpack_require__(31);
 
 
 
@@ -11995,7 +11995,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
 
 function fetchTopics() {
     return new Promise((resolve, reject) => {
-        __WEBPACK_IMPORTED_MODULE_3__api_http__["a" /* default */].get(__WEBPACK_IMPORTED_MODULE_2__api_index__["a" /* default */].Api.getArticleList, { page: 1 }).then(topics => {
+        __WEBPACK_IMPORTED_MODULE_3__api_http_js__["a" /* default */].get(__WEBPACK_IMPORTED_MODULE_2__api_index_js__["a" /* default */].Api.getArticleList, { page: 1 }).then(topics => {
             resolve(topics.data.data);
         });
     });
@@ -12990,7 +12990,7 @@ var index_esm = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_qs__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_qs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_qs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_js__ = __webpack_require__(8);
 
 
 
@@ -13001,7 +13001,7 @@ var index_esm = {
             method: 'post',
             url: url,
             data: __WEBPACK_IMPORTED_MODULE_1_qs___default.a.stringify(data),
-            timeout: __WEBPACK_IMPORTED_MODULE_2__index__["a" /* default */].timeout,
+            timeout: __WEBPACK_IMPORTED_MODULE_2__index_js__["a" /* default */].timeout,
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -13013,7 +13013,7 @@ var index_esm = {
             method: 'get',
             url: url,
             params,
-            timeout: __WEBPACK_IMPORTED_MODULE_2__index__["a" /* default */].timeout,
+            timeout: __WEBPACK_IMPORTED_MODULE_2__index_js__["a" /* default */].timeout,
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }

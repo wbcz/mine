@@ -9,11 +9,11 @@ const app = express()
 
 const webPackClientConfig = merge(base, {
     entry: {
-        client: './entry-client.js'
+        client: '../src/entry-client.js'
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/client/index.html',
+            template: '../src/client/index.html',
             filename: 'index.html'
         })
     ]

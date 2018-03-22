@@ -1,7 +1,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import config from './api/index'
-import $http from './api/http'
+import config from './api/index.js'
+import $http from './api/http.js'
 
 Vue.use(Vuex)
 
