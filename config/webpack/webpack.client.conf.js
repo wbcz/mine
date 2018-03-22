@@ -6,14 +6,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const isProd = process.env.NODE_ENV === 'production'
 const express = require('express')
 const app = express()
+const path = require('path')
+
+const resolve = dir => {
+    return path.join(__dirname, '../..', dir)
+}
 
 const webPackClientConfig = merge(base, {
     entry: {
-        client: '../src/entry-client.js'
+        client: resolve('/src/entry-client.js')
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: '../src/client/index.html',
+            template: resolve('/src/client/index.html'),
             filename: 'index.html'
         })
     ]

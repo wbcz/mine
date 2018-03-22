@@ -10628,6 +10628,7 @@ module.exports = function normalizeComponent (
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     asyncData({ store }) {
+        console.log(store, 'asyncData');
         return store.dispatch('fetchTopics');
     },
     computed: {
@@ -10636,7 +10637,8 @@ module.exports = function normalizeComponent (
         }
     },
     created() {
-        console.log('bar created');
+        this.$store.dispatch('fetchTopics');
+        console.log('bar created22');
     }
 });
 
@@ -11155,11 +11157,11 @@ module.exports = {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_client_app_js__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__client_app_js__ = __webpack_require__(17);
 
 
 
-const { app, store } = Object(__WEBPACK_IMPORTED_MODULE_0__src_client_app_js__["a" /* default */])();
+const { app, store } = Object(__WEBPACK_IMPORTED_MODULE_0__client_app_js__["a" /* default */])();
 
 if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__);

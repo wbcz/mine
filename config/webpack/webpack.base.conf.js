@@ -13,7 +13,7 @@ module.exports = {
         }
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: resolve('/dist'),
         filename: '[name].js'
     },
     module: {
