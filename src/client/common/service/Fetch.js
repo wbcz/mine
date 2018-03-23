@@ -1,4 +1,4 @@
-import { HOST }  from '../constant';
+import api  from '../../api';
 
 export const status = response => {
     if (response.status >= 200 && response.status < 300) {
@@ -31,10 +31,8 @@ export const generatorQueryString = params =>
         ? Object.keys(params).map(key => key + '=' + JSON.stringify(params[key])).join('&')
         : params;
 
-// TODO
 const httpFetch = (url, options) => {
-    console.log(HOST, 'HOST')
-    url = HOST + url;
+    url = api.HOST + url;
     return $http(url, options);
 };
 

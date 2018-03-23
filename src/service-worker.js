@@ -122,12 +122,12 @@ const onFetch = function (event) {
 
 const onPush = function (event) {
     const payload = event.data ? event.data.text() : '{}';
-    const { body, link } = JSON.parse(payload);
+    const { body, link, title } = JSON.parse(payload);
 
-    event.waitUntil(_self.registration.showNotification('New Post Arrival', {
+    event.waitUntil(_self.registration.showNotification(title, {
         body,
         data: link,
-        // icon: '/assets/img/logo/size-48.png'
+        icon: '/assets/images/icon.png'
     }));
 };
 

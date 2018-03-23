@@ -4,10 +4,12 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "clean": "rm -rf build",
+        "copy:posts": "npm run clean && mkdir build && mkdir build/server && mkdir build/server/data && cp -r src/server/data/. build/server/data",
         "client": "webpack --config webpack.client.conf.js",
         "build": "rm -rf ./dist && webpack --config config/webpack/webpack.client.conf.js && webpack --config config/webpack/webpack.server.conf.js",
         "dev": "docker-compose down --volume && docker-compose up --build",
-        "start": "babel src/server -w -d build/server --no-babelrc --presets=es2017 --presets=es2015,stage-3 --plugins=transform-runtime & nodemon --watch build --delay 2 build/server/index.js",
+        "start": "npm run copy:posts && babel src/server -w -d build/server --no-babelrc --presets=es2017 --presets=es2015,stage-3 --plugins=transform-runtime & nodemon --watch build --delay 2 build/server/index.js",
         "prod": "pm2 start src/server/index.js",
         "deploy": "scp -r ../mine/.  root@45.76.7.65:/mine/"
     },

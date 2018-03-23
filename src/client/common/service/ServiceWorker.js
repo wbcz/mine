@@ -19,11 +19,10 @@ const sendMessageToSW = msg => new Promise((resolve, reject) => {
 });
 
 if (isSupportServiceWorker()) {
-    const sw = navigator.serviceWorker;
 
-    sw.addEventListener('message', e => console.log(e.data));
-
-    sw.register(SERVICE_WORKER_FILE_PATH)
+    navigator.serviceWorker.addEventListener('message', e => console.log(e.data));
+    
+    navigator.serviceWorker.register(SERVICE_WORKER_FILE_PATH)
         .catch(console.error)
         .then(registration => 
             registration.pushManager.getSubscription()
