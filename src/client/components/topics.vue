@@ -16,6 +16,7 @@
 <script>
     export default {
         asyncData({store}) {
+            console.log(store, 'asyncData')
             return store.dispatch('fetchTopics')
         },
         computed: {
@@ -24,7 +25,8 @@
             }
         },
         created() {
-            console.log('bar created')
+            this.$store.dispatch('fetchTopics')
+            console.log('bar created242')
         }
     }
 </script>

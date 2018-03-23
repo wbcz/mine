@@ -1,0 +1,21 @@
+
+version: '2'
+
+services:
+  node:
+    build: .
+    container_name: nodeMine
+    image: blog
+    volumes:
+      - .:/mine
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      
+  db:
+    image: mongo
+    container_name: mineDb
+    ports:
+      - "27017:27017"
+    command: "--smallfiles --logpath=/dev/null"

@@ -1,0 +1,24 @@
+{
+    "dir": "ltr",
+    "lang": "en",
+    "name": "mine",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "/",
+    "short_name": "mine",
+    "theme_color": "transparent",
+    "description": "mine",
+    "orientation": "any",
+    "background_color": "transparent",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "src/client/assets/images/icon.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        }
+    ],
+    "gcm_sender_id": "490649471686",
+    "applicationServerKey": "AAAAcjz8ysY:APA91bEjaisIjXw1h353bZzq_NbzCkrAZYoOzYBQ039dEsLsWYCDWCkS1VkHjT0SkpbIhtFjSDyAOzUsTt93ACYnZHW6j_aeZQw6g4OdKL46QBA0tg9od_28u-dJPP-_Qw1YOqS2iLQN"
+}

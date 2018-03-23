@@ -70,6 +70,8 @@
 "use strict";
 
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var bind = __webpack_require__(9);
 var isBuffer = __webpack_require__(34);
 
@@ -162,7 +164,7 @@ function isUndefined(val) {
  * @returns {boolean} True if value is an Object, otherwise false
  */
 function isObject(val) {
-  return val !== null && typeof val === 'object';
+  return val !== null && (typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object';
 }
 
 /**
@@ -274,7 +276,7 @@ function forEach(obj, fn) {
   }
 
   // Force an array if not already something iterable
-  if (typeof obj !== 'object') {
+  if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) !== 'object') {
     /*eslint no-param-reassign:0*/
     obj = [obj];
   }
@@ -314,7 +316,7 @@ function forEach(obj, fn) {
 function merge() /* obj1, obj2, obj3, ... */{
   var result = {};
   function assignValue(val, key) {
-    if (typeof result[key] === 'object' && typeof val === 'object') {
+    if (_typeof(result[key]) === 'object' && (typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object') {
       result[key] = merge(result[key], val);
     } else {
       result[key] = val;
@@ -371,7 +373,10 @@ module.exports = {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -564,6 +569,34 @@ process.umask = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var BASE = 'https://cnodejs.org/api/v1/';
+var timeout = 30000;
+var HOST = 'http://localhost:3000';
+var getUrl = function getUrl(path) {
+    return BASE + path;
+};
+
+var Api = {
+    getArticleList: getUrl('topics')
+};
+
+exports.default = {
+    Api: Api,
+    timeout: timeout,
+    HOST: HOST
+};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
@@ -653,17 +686,26 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global, setImmediate) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*!
  * Vue.js v2.5.13
  * (c) 2014-2017 Evan You
  * Released under the MIT License.
  */
 (function (global, factory) {
-   true ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : global.Vue = factory();
-})(this, function () {
+  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : global.Vue = factory();
+})(undefined, function () {
   'use strict';
 
   /*  */
@@ -694,7 +736,7 @@ module.exports = defaults;
   function isPrimitive(value) {
     return typeof value === 'string' || typeof value === 'number' ||
     // $flow-disable-line
-    typeof value === 'symbol' || typeof value === 'boolean';
+    (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'symbol' || typeof value === 'boolean';
   }
 
   /**
@@ -703,7 +745,7 @@ module.exports = defaults;
    * is a JSON-compliant type.
    */
   function isObject(obj) {
-    return obj !== null && typeof obj === 'object';
+    return obj !== null && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object';
   }
 
   /**
@@ -739,7 +781,7 @@ module.exports = defaults;
    * Convert a value to a string that is actually rendered.
    */
   function toString(val) {
-    return val == null ? '' : typeof val === 'object' ? JSON.stringify(val, null, 2) : String(val);
+    return val == null ? '' : (typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' ? JSON.stringify(val, null, 2) : String(val);
   }
 
   /**
@@ -893,14 +935,14 @@ module.exports = defaults;
   /**
    * Always return false.
    */
-  var no = function (a, b, c) {
+  var no = function no(a, b, c) {
     return false;
   };
 
   /**
    * Return same value
    */
-  var identity = function (_) {
+  var identity = function identity(_) {
     return _;
   };
 
@@ -1149,7 +1191,7 @@ module.exports = defaults;
   // this needs to be lazy-evaled because vue may be required before
   // vue-server-renderer can set VUE_ENV
   var _isServer;
-  var isServerRendering = function () {
+  var isServerRendering = function isServerRendering() {
     if (_isServer === undefined) {
       /* istanbul ignore if */
       if (!inBrowser && typeof global !== 'undefined') {
@@ -1208,13 +1250,13 @@ module.exports = defaults;
   {
     var hasConsole = typeof console !== 'undefined';
     var classifyRE = /(?:^|[-_])(\w)/g;
-    var classify = function (str) {
+    var classify = function classify(str) {
       return str.replace(classifyRE, function (c) {
         return c.toUpperCase();
       }).replace(/[-_]/g, '');
     };
 
-    warn = function (msg, vm) {
+    warn = function warn(msg, vm) {
       var trace = vm ? generateComponentTrace(vm) : '';
 
       if (config.warnHandler) {
@@ -1224,13 +1266,13 @@ module.exports = defaults;
       }
     };
 
-    tip = function (msg, vm) {
+    tip = function tip(msg, vm) {
       if (hasConsole && !config.silent) {
         console.warn("[Vue tip]: " + msg + (vm ? generateComponentTrace(vm) : ''));
       }
     };
 
-    formatComponentName = function (vm, includeFile) {
+    formatComponentName = function formatComponentName(vm, includeFile) {
       if (vm.$root === vm) {
         return '<Root>';
       }
@@ -1245,7 +1287,7 @@ module.exports = defaults;
       return (name ? "<" + classify(name) + ">" : "<Anonymous>") + (file && includeFile !== false ? " at " + file : '');
     };
 
-    var repeat = function (str, n) {
+    var repeat = function repeat(str, n) {
       var res = '';
       while (n) {
         if (n % 2 === 1) {
@@ -1259,7 +1301,7 @@ module.exports = defaults;
       return res;
     };
 
-    generateComponentTrace = function (vm) {
+    generateComponentTrace = function generateComponentTrace(vm) {
       if (vm._isVue && vm.$parent) {
         var tree = [];
         var currentRecursiveSequence = 0;
@@ -1377,7 +1419,7 @@ module.exports = defaults;
 
   Object.defineProperties(VNode.prototype, prototypeAccessors);
 
-  var createEmptyVNode = function (text) {
+  var createEmptyVNode = function createEmptyVNode(text) {
     if (text === void 0) text = '';
 
     var node = new VNode();
@@ -1437,9 +1479,9 @@ module.exports = defaults;
     def(arrayMethods, method, function mutator() {
       var args = [],
           len = arguments.length;
-      while (len--) args[len] = arguments[len];
-
-      var result = original.apply(this, args);
+      while (len--) {
+        args[len] = arguments[len];
+      }var result = original.apply(this, args);
       var ob = this.__ob__;
       var inserted;
       switch (method) {
@@ -1860,7 +1902,7 @@ module.exports = defaults;
   /**
    * Default strategy.
    */
-  var defaultStrat = function (parentVal, childVal) {
+  var defaultStrat = function defaultStrat(parentVal, childVal) {
     return childVal === undefined ? parentVal : childVal;
   };
 
@@ -2128,7 +2170,7 @@ module.exports = defaults;
     var valid;
     var expectedType = getType(type);
     if (simpleCheckRE.test(expectedType)) {
-      var t = typeof value;
+      var t = typeof value === 'undefined' ? 'undefined' : _typeof(value);
       valid = t === expectedType.toLowerCase();
       // for primitive wrapper objects
       if (!valid && t === 'object') {
@@ -2250,7 +2292,7 @@ module.exports = defaults;
   // events triggered in the same loop is by using MessageChannel.
   /* istanbul ignore if */
   if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
-    macroTimerFunc = function () {
+    macroTimerFunc = function macroTimerFunc() {
       setImmediate(flushCallbacks);
     };
   } else if (typeof MessageChannel !== 'undefined' && (isNative(MessageChannel) ||
@@ -2259,12 +2301,12 @@ module.exports = defaults;
     var channel = new MessageChannel();
     var port = channel.port2;
     channel.port1.onmessage = flushCallbacks;
-    macroTimerFunc = function () {
+    macroTimerFunc = function macroTimerFunc() {
       port.postMessage(1);
     };
   } else {
     /* istanbul ignore next */
-    macroTimerFunc = function () {
+    macroTimerFunc = function macroTimerFunc() {
       setTimeout(flushCallbacks, 0);
     };
   }
@@ -2273,7 +2315,7 @@ module.exports = defaults;
   /* istanbul ignore next, $flow-disable-line */
   if (typeof Promise !== 'undefined' && isNative(Promise)) {
     var p = Promise.resolve();
-    microTimerFunc = function () {
+    microTimerFunc = function microTimerFunc() {
       p.then(flushCallbacks);
       // in problematic UIWebViews, Promise.then doesn't completely break, but
       // it can get stuck in a weird state where callbacks are pushed into the
@@ -2340,10 +2382,10 @@ module.exports = defaults;
     var perf = inBrowser && window.performance;
     /* istanbul ignore if */
     if (perf && perf.mark && perf.measure && perf.clearMarks && perf.clearMeasures) {
-      mark = function (tag) {
+      mark = function mark(tag) {
         return perf.mark(tag);
       };
-      measure = function (name, startTag, endTag) {
+      measure = function measure(name, startTag, endTag) {
         perf.measure(name, startTag, endTag);
         perf.clearMarks(startTag);
         perf.clearMarks(endTag);
@@ -2360,7 +2402,7 @@ module.exports = defaults;
     var allowedGlobals = makeMap('Infinity,undefined,NaN,isFinite,isNaN,' + 'parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,' + 'Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,' + 'require' // for Webpack/Browserify
     );
 
-    var warnNonPresent = function (target, key) {
+    var warnNonPresent = function warnNonPresent(target, key) {
       warn("Property or method \"" + key + "\" is not defined on the instance but " + 'referenced during render. Make sure that this property is reactive, ' + 'either in the data option, or for class-based components, by ' + 'initializing the property. ' + 'See: https://vuejs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties.', target);
     };
 
@@ -2717,7 +2759,7 @@ module.exports = defaults;
       var contexts = factory.contexts = [context];
       var sync = true;
 
-      var forceRender = function () {
+      var forceRender = function forceRender() {
         for (var i = 0, l = contexts.length; i < l; i++) {
           contexts[i].$forceUpdate();
         }
@@ -3132,7 +3174,7 @@ module.exports = defaults;
     var updateComponent;
     /* istanbul ignore if */
     if ("development" !== 'production' && config.performance && mark) {
-      updateComponent = function () {
+      updateComponent = function updateComponent() {
         var name = vm._name;
         var id = vm._uid;
         var startTag = "vue-perf-start:" + id;
@@ -3149,7 +3191,7 @@ module.exports = defaults;
         measure("vue " + name + " patch", startTag, endTag);
       };
     } else {
-      updateComponent = function () {
+      updateComponent = function updateComponent() {
         vm._update(vm._render(), hydrating);
       };
     }
@@ -3666,7 +3708,7 @@ module.exports = defaults;
     var isRoot = !vm.$parent;
     // root instance props should be converted
     observerState.shouldConvert = isRoot;
-    var loop = function (key) {
+    var loop = function loop(key) {
       keys.push(key);
       var value = validateProp(key, propsOptions, propsData, vm);
       /* istanbul ignore else */
@@ -3689,8 +3731,9 @@ module.exports = defaults;
       }
     };
 
-    for (var key in propsOptions) loop(key);
-    observerState.shouldConvert = true;
+    for (var key in propsOptions) {
+      loop(key);
+    }observerState.shouldConvert = true;
   }
 
   function initData(vm) {
@@ -4053,7 +4096,7 @@ module.exports = defaults;
           value = toObject(value);
         }
         var hash;
-        var loop = function (key) {
+        var loop = function loop(key) {
           if (key === 'class' || key === 'style' || isReservedAttribute(key)) {
             hash = data;
           } else {
@@ -4072,7 +4115,9 @@ module.exports = defaults;
           }
         };
 
-        for (var key in value) loop(key);
+        for (var key in value) {
+          loop(key);
+        }
       }
     }
     return data;
@@ -5159,7 +5204,7 @@ module.exports = defaults;
 
   // attributes that should be using props for binding
   var acceptValue = makeMap('input,textarea,option,select,progress');
-  var mustUseProp = function (tag, type, attr) {
+  var mustUseProp = function mustUseProp(tag, type, attr) {
     return attr === 'value' && acceptValue(tag) && type !== 'button' || attr === 'selected' && tag === 'option' || attr === 'checked' && tag === 'input' || attr === 'muted' && tag === 'video';
   };
 
@@ -5169,15 +5214,15 @@ module.exports = defaults;
 
   var xlinkNS = 'http://www.w3.org/1999/xlink';
 
-  var isXlink = function (name) {
+  var isXlink = function isXlink(name) {
     return name.charAt(5) === ':' && name.slice(0, 5) === 'xlink';
   };
 
-  var getXlinkProp = function (name) {
+  var getXlinkProp = function getXlinkProp(name) {
     return isXlink(name) ? name.slice(6, name.length) : '';
   };
 
-  var isFalsyAttrValue = function (val) {
+  var isFalsyAttrValue = function isFalsyAttrValue(val) {
     return val == null || val === false;
   };
 
@@ -5274,11 +5319,11 @@ module.exports = defaults;
   // contain child elements.
   var isSVG = makeMap('svg,animate,circle,clippath,cursor,defs,desc,ellipse,filter,font-face,' + 'foreignObject,g,glyph,image,line,marker,mask,missing-glyph,path,pattern,' + 'polygon,polyline,rect,switch,symbol,text,textpath,tspan,use,view', true);
 
-  var isPreTag = function (tag) {
+  var isPreTag = function isPreTag(tag) {
     return tag === 'pre';
   };
 
-  var isReservedTag = function (tag) {
+  var isReservedTag = function isReservedTag(tag) {
     return isHTMLTag(tag) || isSVG(tag);
   };
 
@@ -6209,7 +6254,7 @@ module.exports = defaults;
     }
 
     if (dirsWithInsert.length) {
-      var callInsert = function () {
+      var callInsert = function callInsert() {
         for (var i = 0; i < dirsWithInsert.length; i++) {
           callHook$1(dirsWithInsert[i], 'inserted', vnode, oldVnode);
         }
@@ -6350,7 +6395,7 @@ module.exports = defaults;
         // immediately.
         /* istanbul ignore if */
         if (isIE && !isIE9 && el.tagName === 'TEXTAREA' && key === 'placeholder' && !el.__ieph) {
-          var blocker = function (e) {
+          var blocker = function blocker(e) {
             e.stopImmediatePropagation();
             el.removeEventListener('input', blocker);
           };
@@ -7126,7 +7171,7 @@ module.exports = defaults;
 
   var cssVarRE = /^--/;
   var importantRE = /\s*!important$/;
-  var setProp = function (el, name, val) {
+  var setProp = function setProp(el, name, val) {
     /* istanbul ignore if */
     if (cssVarRE.test(name)) {
       el.style.setProperty(name, val);
@@ -7282,7 +7327,7 @@ module.exports = defaults;
       return;
     }
     /* istanbul ignore else */
-    if (typeof def === 'object') {
+    if ((typeof def === 'undefined' ? 'undefined' : _typeof(def)) === 'object') {
       var res = {};
       if (def.css !== false) {
         extend(res, autoCssTransition(def.name || 'v'));
@@ -7362,11 +7407,11 @@ module.exports = defaults;
     }
     var event = type === TRANSITION ? transitionEndEvent : animationEndEvent;
     var ended = 0;
-    var end = function () {
+    var end = function end() {
       el.removeEventListener(event, onEnd);
       cb();
     };
-    var onEnd = function (e) {
+    var onEnd = function onEnd(e) {
       if (e.target === el) {
         if (++ended >= propCount) {
           end();
@@ -8091,7 +8136,7 @@ module.exports = defaults;
             return oldRawChild;
           }
           var delayedLeave;
-          var performLeave = function () {
+          var performLeave = function performLeave() {
             delayedLeave();
           };
           mergeVNodeHook(data, 'afterEnter', performLeave);
@@ -8504,7 +8549,7 @@ module.exports = defaults;
 
   // #5992
   var isIgnoreNewlineTag = makeMap('pre,textarea', true);
-  var shouldIgnoreFirstNewline = function (tag, html) {
+  var shouldIgnoreFirstNewline = function shouldIgnoreFirstNewline(tag, html) {
     return tag && isIgnoreNewlineTag(tag) && html[0] === '\n';
   };
 
@@ -9595,7 +9640,7 @@ module.exports = defaults;
   // #4868: modifiers that prevent the execution of the listener
   // need to explicitly return null so that we can determine whether to remove
   // the listener for .once
-  var genGuard = function (condition) {
+  var genGuard = function genGuard(condition) {
     return "if(" + condition + ")return null;";
   };
 
@@ -10429,11 +10474,16 @@ module.exports = defaults;
 
   return Vue$3;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(18).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(18).setImmediate))
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports) {
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var g;
 
@@ -10447,7 +10497,7 @@ try {
 	g = g || Function("return this")() || (1, eval)("this");
 } catch (e) {
 	// This works if the window reference is available
-	if (typeof window === "object") g = window;
+	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
 }
 
 // g can still be undefined, but nothing to do about it...
@@ -10457,7 +10507,7 @@ try {
 module.exports = g;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -10566,101 +10616,97 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_topics_vue__ = __webpack_require__(21);
-//
-//
-//
-//
-//
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-/* harmony default export */ __webpack_exports__["a"] = ({
-    data() {
+var _topics = __webpack_require__(21);
+
+var _topics2 = _interopRequireDefault(_topics);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    data: function data() {
         return {};
     },
-    beforeCreate() {
+    beforeCreate: function beforeCreate() {
         console.log('App beforeCreate');
     },
-    created() {
+    created: function created() {
         console.log('App created');
     },
-    beforeMount() {
+    beforeMount: function beforeMount() {
         console.log('App beforeMount');
     },
-    mounted() {
+    mounted: function mounted() {
         console.log('App mounted');
     },
+
     methods: {
-        trigger() {
+        trigger: function trigger() {
             console.log('触发点击事件');
         }
     },
     components: {
-        topics: __WEBPACK_IMPORTED_MODULE_0__components_topics_vue__["a" /* default */]
+        topics: _topics2.default
     }
-});
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
+}; //
 //
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    asyncData({ store }) {
-        return store.dispatch('fetchTopics');
-    },
-    computed: {
-        topics() {
-            return this.$store.state.topics;
-        }
-    },
-    created() {
-        console.log('bar created');
-    }
-});
 
 /***/ }),
 /* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-const BASE = 'https://cnodejs.org/api/v1/';
-const timeout = 30000;
 
-const getUrl = path => {
-    return BASE + path;
-};
-
-const Api = {
-    getArticleList: getUrl('topics')
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    Api,
-    timeout
+Object.defineProperty(exports, "__esModule", {
+    value: true
 });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    asyncData: function asyncData(_ref) {
+        var store = _ref.store;
+
+        console.log(store, 'asyncData');
+        return store.dispatch('fetchTopics');
+    },
+
+    computed: {
+        topics: function topics() {
+            return this.$store.state.topics;
+        }
+    },
+    created: function created() {
+        this.$store.dispatch('fetchTopics');
+        console.log('bar created242');
+    }
+};
 
 /***/ }),
 /* 9 */
@@ -10928,6 +10974,8 @@ module.exports = Cancel;
 "use strict";
 
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var has = Object.prototype.hasOwnProperty;
 
 var hexTable = function () {
@@ -10978,10 +11026,10 @@ exports.merge = function merge(target, source, options) {
         return target;
     }
 
-    if (typeof source !== 'object') {
+    if ((typeof source === 'undefined' ? 'undefined' : _typeof(source)) !== 'object') {
         if (Array.isArray(target)) {
             target.push(source);
-        } else if (typeof target === 'object') {
+        } else if ((typeof target === 'undefined' ? 'undefined' : _typeof(target)) === 'object') {
             if (options.plainObjects || options.allowPrototypes || !has.call(Object.prototype, source)) {
                 target[source] = true;
             }
@@ -10992,7 +11040,7 @@ exports.merge = function merge(target, source, options) {
         return target;
     }
 
-    if (typeof target !== 'object') {
+    if ((typeof target === 'undefined' ? 'undefined' : _typeof(target)) !== 'object') {
         return [target].concat(source);
     }
 
@@ -11004,7 +11052,7 @@ exports.merge = function merge(target, source, options) {
     if (Array.isArray(target) && Array.isArray(source)) {
         source.forEach(function (item, i) {
             if (has.call(target, i)) {
-                if (target[i] && typeof target[i] === 'object') {
+                if (target[i] && _typeof(target[i]) === 'object') {
                     target[i] = exports.merge(target[i], item, options);
                 } else {
                     target.push(item);
@@ -11103,7 +11151,7 @@ exports.compact = function compact(value) {
         for (var j = 0; j < keys.length; ++j) {
             var key = keys[j];
             var val = obj[key];
-            if (typeof val === 'object' && val !== null && refs.indexOf(val) === -1) {
+            if ((typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' && val !== null && refs.indexOf(val) === -1) {
                 queue.push({ obj: obj, prop: key });
                 refs.push(val);
             }
@@ -11138,10 +11186,10 @@ var percentTwenties = /%20/g;
 module.exports = {
     'default': 'RFC3986',
     formatters: {
-        RFC1738: function (value) {
+        RFC1738: function RFC1738(value) {
             return replace.call(value, percentTwenties, '+');
         },
-        RFC3986: function (value) {
+        RFC3986: function RFC3986(value) {
             return value;
         }
     },
@@ -11151,15 +11199,20 @@ module.exports = {
 
 /***/ }),
 /* 16 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_client_app__ = __webpack_require__(17);
 
 
+var _app = __webpack_require__(17);
 
-const { app, store } = Object(__WEBPACK_IMPORTED_MODULE_0__src_client_app__["a" /* default */])();
+var _app2 = _interopRequireDefault(_app);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _createApp = (0, _app2.default)(),
+    app = _createApp.app,
+    store = _createApp.store;
 
 if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__);
@@ -11169,29 +11222,48 @@ app.$mount('#app');
 
 /***/ }),
 /* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App_vue__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store_js__ = __webpack_require__(29);
 
 
-
-
-/* harmony default export */ __webpack_exports__["a"] = (function () {
-    const store = Object(__WEBPACK_IMPORTED_MODULE_2__store_js__["a" /* default */])();
-    const app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-        store,
-        render: h => h(__WEBPACK_IMPORTED_MODULE_1__App_vue__["a" /* default */])
-    });
-    return { app, store };
+Object.defineProperty(exports, "__esModule", {
+    value: true
 });
+
+exports.default = function () {
+    var store = (0, _store2.default)();
+    var app = new _vue2.default({
+        store: store,
+        render: function render(h) {
+            return h(_App2.default);
+        }
+    });
+    return { app: app, store: store };
+};
+
+var _vue = __webpack_require__(4);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _App = __webpack_require__(20);
+
+var _App2 = _interopRequireDefault(_App);
+
+var _store = __webpack_require__(29);
+
+var _store2 = _interopRequireDefault(_store);
+
+__webpack_require__(54);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 var apply = Function.prototype.apply;
 
@@ -11249,7 +11321,10 @@ exports.clearImmediate = clearImmediate;
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global, process) {
+
+(function (global, undefined) {
     "use strict";
 
     if (global.setImmediate) {
@@ -11327,7 +11402,7 @@ exports.clearImmediate = clearImmediate;
     }
 
     function installNextTickImplementation() {
-        registerImmediate = function (handle) {
+        registerImmediate = function registerImmediate(handle) {
             process.nextTick(function () {
                 runIfPresent(handle);
             });
@@ -11355,7 +11430,7 @@ exports.clearImmediate = clearImmediate;
         // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
 
         var messagePrefix = "setImmediate$" + Math.random() + "$";
-        var onGlobalMessage = function (event) {
+        var onGlobalMessage = function onGlobalMessage(event) {
             if (event.source === global && typeof event.data === "string" && event.data.indexOf(messagePrefix) === 0) {
                 runIfPresent(+event.data.slice(messagePrefix.length));
             }
@@ -11367,7 +11442,7 @@ exports.clearImmediate = clearImmediate;
             global.attachEvent("onmessage", onGlobalMessage);
         }
 
-        registerImmediate = function (handle) {
+        registerImmediate = function registerImmediate(handle) {
             global.postMessage(messagePrefix + handle, "*");
         };
     }
@@ -11379,14 +11454,14 @@ exports.clearImmediate = clearImmediate;
             runIfPresent(handle);
         };
 
-        registerImmediate = function (handle) {
+        registerImmediate = function registerImmediate(handle) {
             channel.port2.postMessage(handle);
         };
     }
 
     function installReadyStateChangeImplementation() {
         var html = doc.documentElement;
-        registerImmediate = function (handle) {
+        registerImmediate = function registerImmediate(handle) {
             // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
             // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
             var script = doc.createElement("script");
@@ -11401,7 +11476,7 @@ exports.clearImmediate = clearImmediate;
     }
 
     function installSetTimeoutImplementation() {
-        registerImmediate = function (handle) {
+        registerImmediate = function registerImmediate(handle) {
             setTimeout(runIfPresent, 0, handle);
         };
     }
@@ -11430,19 +11505,21 @@ exports.clearImmediate = clearImmediate;
 
     attachTo.setImmediate = setImmediate;
     attachTo.clearImmediate = clearImmediate;
-})(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(1)))
+})(typeof self === "undefined" ? typeof global === "undefined" ? undefined : global : self);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(1)))
 
 /***/ }),
 /* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(6);
-/* unused harmony namespace reexport */
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c9b0854_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(28);
 var disposed = false
-var normalizeComponent = __webpack_require__(5)
+var normalizeComponent = __webpack_require__(6)
 /* script */
 
 
@@ -11457,7 +11534,7 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue___default.a,
   __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7c9b0854_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
@@ -11482,7 +11559,7 @@ if (false) {(function () {
   })
 })()}
 
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
 
 /***/ }),
@@ -11490,15 +11567,17 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_topics_vue__ = __webpack_require__(7);
-/* unused harmony namespace reexport */
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_topics_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_topics_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_topics_vue__);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_topics_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_topics_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5fec415c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_topics_vue__ = __webpack_require__(27);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(22)
 }
-var normalizeComponent = __webpack_require__(5)
+var normalizeComponent = __webpack_require__(6)
 /* script */
 
 
@@ -11513,7 +11592,7 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_topics_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_topics_vue___default.a,
   __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5fec415c_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_topics_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
@@ -11538,7 +11617,7 @@ if (false) {(function () {
   })
 })()}
 
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
 
 /***/ }),
@@ -11583,7 +11662,10 @@ exports.push([module.i, "\n.bar{\n    background: #9e9ecd;\n}\n", ""]);
 
 /***/ }),
 /* 24 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /*
 	MIT License http://www.opensource.org/licenses/mit-license.php
@@ -11883,7 +11965,10 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 /* 26 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /**
  * Translates the list format produced by css-loader into something
@@ -11977,45 +12062,63 @@ if (false) {
 
 /***/ }),
 /* 29 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = createStore;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_index__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api_http__ = __webpack_require__(31);
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = createStore;
 
+var _vuex = __webpack_require__(30);
 
+var _vuex2 = _interopRequireDefault(_vuex);
 
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */]);
+var _vue = __webpack_require__(4);
 
-function fetchTopics() {
-    return new Promise((resolve, reject) => {
-        __WEBPACK_IMPORTED_MODULE_3__api_http__["a" /* default */].get(__WEBPACK_IMPORTED_MODULE_2__api_index__["a" /* default */].Api.getArticleList, { page: 1 }).then(topics => {
+var _vue2 = _interopRequireDefault(_vue);
+
+var _index = __webpack_require__(2);
+
+var _index2 = _interopRequireDefault(_index);
+
+var _http = __webpack_require__(31);
+
+var _http2 = _interopRequireDefault(_http);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_vue2.default.use(_vuex2.default);
+
+function _fetchTopics() {
+    return new Promise(function (resolve, reject) {
+        _http2.default.get(_index2.default.Api.getArticleList, { page: 1 }).then(function (topics) {
             resolve(topics.data.data);
         });
     });
 }
 
 function createStore() {
-    return new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store({
+    return new _vuex2.default.Store({
         state: {
             topics: ''
         },
         actions: {
-            fetchTopics({ commit }) {
-                return fetchTopics().then(topics => {
-                    commit('setTopics', { topics });
+            fetchTopics: function fetchTopics(_ref) {
+                var commit = _ref.commit;
+
+                return _fetchTopics().then(function (topics) {
+                    commit('setTopics', { topics: topics });
                 });
             }
         },
         mutations: {
-            setTopics(state, { topics }) {
-                __WEBPACK_IMPORTED_MODULE_1_vue___default.a.set(state, 'topics', topics);
+            setTopics: function setTopics(state, _ref2) {
+                var topics = _ref2.topics;
+
+                _vue2.default.set(state, 'topics', topics);
             }
         }
     });
@@ -12023,22 +12126,23 @@ function createStore() {
 
 /***/ }),
 /* 30 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* unused harmony export Store */
-/* unused harmony export install */
-/* unused harmony export mapState */
-/* unused harmony export mapMutations */
-/* unused harmony export mapGetters */
-/* unused harmony export mapActions */
-/* unused harmony export createNamespacedHelpers */
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 /**
  * vuex v3.0.1
  * (c) 2017 Evan You
  * @license MIT
  */
-var applyMixin = function (Vue) {
+var applyMixin = function applyMixin(Vue) {
   var version = Number(Vue.version.split('.')[0]);
 
   if (version >= 2) {
@@ -12118,7 +12222,7 @@ function forEachValue(obj, fn) {
 }
 
 function isObject(obj) {
-  return obj !== null && typeof obj === 'object';
+  return obj !== null && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object';
 }
 
 function isPromise(val) {
@@ -12274,15 +12378,15 @@ function update(path, targetModule, newModule) {
 }
 
 var functionAssert = {
-  assert: function (value) {
+  assert: function assert(value) {
     return typeof value === 'function';
   },
   expected: 'function'
 };
 
 var objectAssert = {
-  assert: function (value) {
-    return typeof value === 'function' || typeof value === 'object' && typeof value.handler === 'function';
+  assert: function assert(value) {
+    return typeof value === 'function' || (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && typeof value.handler === 'function';
   },
   expected: 'function or object with "handler" function'
 };
@@ -12572,7 +12676,7 @@ function resetStoreVM(store, state, hot) {
       return fn(store);
     };
     Object.defineProperty(store.getters, key, {
-      get: function () {
+      get: function get() {
         return store._vm[key];
       },
       enumerable: true // for local getters
@@ -12706,7 +12810,7 @@ function makeLocalContext(store, namespace, path) {
       }
     },
     state: {
-      get: function () {
+      get: function get() {
         return getNestedState(store.state, path);
       }
     }
@@ -12732,7 +12836,7 @@ function makeLocalGetters(store, namespace) {
     // Define as getter property because
     // we do not want to evaluate the getters in this time.
     Object.defineProperty(gettersProxy, localType, {
-      get: function () {
+      get: function get() {
         return store.getters[type];
       },
       enumerable: true
@@ -12814,7 +12918,7 @@ function unifyObjectStyle(type, payload, options) {
   }
 
   if (process.env.NODE_ENV !== 'production') {
-    assert(typeof type === 'string', "Expects string as the type, but found " + typeof type + ".");
+    assert(typeof type === 'string', "Expects string as the type, but found " + (typeof type === 'undefined' ? 'undefined' : _typeof(type)) + ".");
   }
 
   return { type: type, payload: payload, options: options };
@@ -12865,9 +12969,9 @@ var mapMutations = normalizeNamespace(function (namespace, mutations) {
     res[key] = function mappedMutation() {
       var args = [],
           len = arguments.length;
-      while (len--) args[len] = arguments[len];
-
-      var commit = this.$store.commit;
+      while (len--) {
+        args[len] = arguments[len];
+      }var commit = this.$store.commit;
       if (namespace) {
         var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
         if (!module) {
@@ -12913,9 +13017,9 @@ var mapActions = normalizeNamespace(function (namespace, actions) {
     res[key] = function mappedAction() {
       var args = [],
           len = arguments.length;
-      while (len--) args[len] = arguments[len];
-
-      var dispatch = this.$store.dispatch;
+      while (len--) {
+        args[len] = arguments[len];
+      }var dispatch = this.$store.dispatch;
       if (namespace) {
         var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
         if (!module) {
@@ -12929,7 +13033,7 @@ var mapActions = normalizeNamespace(function (namespace, actions) {
   return res;
 });
 
-var createNamespacedHelpers = function (namespace) {
+var createNamespacedHelpers = function createNamespacedHelpers(namespace) {
   return {
     mapState: mapState.bind(null, namespace),
     mapGetters: mapGetters.bind(null, namespace),
@@ -12977,53 +13081,73 @@ var index_esm = {
   createNamespacedHelpers: createNamespacedHelpers
 };
 
-
-/* harmony default export */ __webpack_exports__["a"] = (index_esm);
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+exports.Store = Store;
+exports.install = install;
+exports.mapState = mapState;
+exports.mapMutations = mapMutations;
+exports.mapGetters = mapGetters;
+exports.mapActions = mapActions;
+exports.createNamespacedHelpers = createNamespacedHelpers;
+exports.default = index_esm;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 31 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_qs__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_qs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_qs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index__ = __webpack_require__(8);
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
+var _axios = __webpack_require__(32);
 
-/* harmony default export */ __webpack_exports__["a"] = ({
-    post(url, data) {
-        return __WEBPACK_IMPORTED_MODULE_0_axios___default()({
+var _axios2 = _interopRequireDefault(_axios);
+
+var _qs = __webpack_require__(51);
+
+var _qs2 = _interopRequireDefault(_qs);
+
+var _index = __webpack_require__(2);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    post: function post(url, data) {
+        return (0, _axios2.default)({
             method: 'post',
             url: url,
-            data: __WEBPACK_IMPORTED_MODULE_1_qs___default.a.stringify(data),
-            timeout: __WEBPACK_IMPORTED_MODULE_2__index__["a" /* default */].timeout,
+            data: _qs2.default.stringify(data),
+            timeout: _index2.default.timeout,
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             }
         });
     },
-    get(url, params) {
-        return __WEBPACK_IMPORTED_MODULE_0_axios___default()({
+    get: function get(url, params) {
+        return (0, _axios2.default)({
             method: 'get',
             url: url,
-            params,
-            timeout: __WEBPACK_IMPORTED_MODULE_2__index__["a" /* default */].timeout,
+            params: params,
+            timeout: _index2.default.timeout,
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
         });
     }
-});
+};
 
 /***/ }),
 /* 32 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 module.exports = __webpack_require__(33);
 
@@ -13037,7 +13161,7 @@ module.exports = __webpack_require__(33);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(9);
 var Axios = __webpack_require__(35);
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 
 /**
  * Create an instance of Axios
@@ -13087,7 +13211,10 @@ module.exports.default = axios;
 
 /***/ }),
 /* 34 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /*!
  * Determine if an object is a Buffer
@@ -13118,7 +13245,7 @@ function isSlowBuffer(obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(44);
 var dispatchRequest = __webpack_require__(45);
@@ -13628,7 +13755,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(46);
 var isCancel = __webpack_require__(12);
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var isAbsoluteURL = __webpack_require__(47);
 var combineURLs = __webpack_require__(48);
 
@@ -13879,6 +14006,8 @@ module.exports = {
 "use strict";
 
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var utils = __webpack_require__(14);
 var formats = __webpack_require__(15);
 
@@ -14002,7 +14131,7 @@ module.exports = function (object, opts) {
 
     var keys = [];
 
-    if (typeof obj !== 'object' || obj === null) {
+    if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) !== 'object' || obj === null) {
         return '';
     }
 
@@ -14094,7 +14223,7 @@ var parseValues = function parseQueryStringValues(str, options) {
     return obj;
 };
 
-var parseObject = function (chain, val, options) {
+var parseObject = function parseObject(chain, val, options) {
     var leaf = val;
 
     for (var i = chain.length - 1; i >= 0; --i) {
@@ -14214,6 +14343,189 @@ module.exports = function (str, opts) {
 
     return utils.compact(obj);
 };
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _Subscription = __webpack_require__(55);
+
+var _Subscription2 = _interopRequireDefault(_Subscription);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SERVICE_WORKER_API = 'serviceWorker';
+var SERVICE_WORKER_FILE_PATH = '/service-worker.js';
+
+var isSupportServiceWorker = function isSupportServiceWorker() {
+    return SERVICE_WORKER_API in navigator;
+};
+
+var sendMessageToSW = function sendMessageToSW(msg) {
+    return new Promise(function (resolve, reject) {
+        var messageChannel = new MessageChannel();
+        messageChannel.port1.onmessage = function (event) {
+            if (event.data.error) {
+                reject(event.data.error);
+            } else {
+                resolve(event.data);
+            }
+        };
+
+        navigator.serviceWorker.controller && navigator.serviceWorker.controller.postMessage(msg, [messageChannel.port2]);
+    });
+};
+
+if (isSupportServiceWorker()) {
+
+    navigator.serviceWorker.addEventListener('message', function (e) {
+        return console.log(e.data);
+    });
+
+    navigator.serviceWorker.register(SERVICE_WORKER_FILE_PATH).catch(console.error).then(function (registration) {
+        return registration.pushManager.getSubscription().then(function (subscription) {
+            return subscription || registration.pushManager.subscribe({ userVisibleOnly: true });
+        });
+    }).then(function (subscription) {
+        return _Subscription2.default.subscript(subscription);
+    }).catch(function (error) {
+        return console.error('Subscribe Failure: ', error.message);
+    }).then(function () {
+        return sendMessageToSW('Hello, service worker.');
+    }).catch(function () {
+        return console.error('Send message error.');
+    });
+} else {
+    console.info('Browser not support Service Worker.');
+}
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Fetch = __webpack_require__(56);
+
+var _Fetch2 = _interopRequireDefault(_Fetch);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var SUBSCRIBE_API = '/publish/subscribe';
+
+var encodeStr = function encodeStr(str) {
+    return btoa(String.fromCharCode.apply(null, new Uint8Array(str)));
+};
+var getEncodeSubscriptionInfo = function getEncodeSubscriptionInfo(subscription, type) {
+    return subscription.getKey ? encodeStr(subscription.getKey(type)) : '';
+};
+
+var SubscriptionService = function () {
+    function SubscriptionService() {
+        _classCallCheck(this, SubscriptionService);
+    }
+
+    _createClass(SubscriptionService, [{
+        key: 'subscript',
+        value: function subscript(subscription) {
+            var endpoint = subscription.endpoint;
+            var p256dh = getEncodeSubscriptionInfo(subscription, 'p256dh');
+            var auth = getEncodeSubscriptionInfo(subscription, 'auth');
+
+            var clientSubscription = { endpoint: endpoint, keys: { p256dh: p256dh, auth: auth } };
+
+            var options = {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(clientSubscription)
+            };
+
+            return (0, _Fetch2.default)(SUBSCRIBE_API, options);
+        }
+    }]);
+
+    return SubscriptionService;
+}();
+
+exports.default = new SubscriptionService();
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.generatorQueryString = exports.generatorUrl = exports.error = exports.json = exports.status = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _api = __webpack_require__(2);
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var status = exports.status = function status(response) {
+    if (response.status >= 200 && response.status < 300) {
+        return Promise.resolve(response);
+    } else {
+        return Promise.reject(new Error(response.statusText));
+    }
+};
+
+var json = exports.json = function json(response) {
+    return response.json();
+};
+
+var error = exports.error = function error(err, url, options) {
+    console.log('Fetch Error:');
+    console.log('Message: ', err);
+    console.log('Url: ', url);
+    console.log('Options: ', options);
+};
+
+var $http = function $http(url, options) {
+    return fetch(url, options).then(status).then(json).catch(function (err) {
+        return error(err, url, options);
+    });
+};
+
+var generatorUrl = exports.generatorUrl = function generatorUrl() {
+    var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    return params ? url + '?' + generatorQueryString(params) : url;
+};
+
+var generatorQueryString = exports.generatorQueryString = function generatorQueryString(params) {
+    return (typeof params === 'undefined' ? 'undefined' : _typeof(params)) === 'object' ? Object.keys(params).map(function (key) {
+        return key + '=' + JSON.stringify(params[key]);
+    }).join('&') : params;
+};
+
+var httpFetch = function httpFetch(url, options) {
+    url = _api2.default.HOST + url;
+    return $http(url, options);
+};
+
+exports.default = httpFetch;
 
 /***/ })
 /******/ ]);

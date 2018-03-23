@@ -1,5 +1,5 @@
 
-import createApp from './src/client/app'
+import createApp from './client/app.js'
 
 const { app, store } = createApp()
 
