@@ -14,32 +14,32 @@ const sentMessage = function (msg) {
     });
 };
 
+//安装服务工作线程
 const onInstall = function (event) {
     event.waitUntil(
         caches
             .open(CACHE_NAME)
-            .then(function () { _self.skipWaiting(); })
+            .then(function () { _self.skipWaiting(); }) //执行该方法表示强制当前处在 waiting 状态的 Service Worker 进入 activate 状态。执行这个操作，所以调试的时候建议直接勾选update on reload，重新更新启动线程
             .then(function () { console.log('Install success'); })
     );
 };
 
+//缓存更新
 const onActive = function (event) {
     event.waitUntil(
-        caches
-            .keys()
-            .then(function (cacheNames) {
+        Promise.all([
+            //更新客户端
+             _self.clients.claim(),
+            caches.keys().then(function (cacheNames) {
                 return Promise.all(
                     cacheNames.map(function (cacheName) {
-                        // Remove expired cache response
                         if (CACHE_NAME.indexOf(cacheName) === -1) {
                             return caches.delete(cacheName);
                         }
                     })
                 );
             })
-            .then(function () {
-                _self.clients.claim();
-            })
+        ])
     );
 };
 
@@ -117,6 +117,7 @@ const handleFetchRequest = function (req) {
 };
 
 const onFetch = function (event) {
+    //通过respondWith将数据返回到网页
     event.respondWith(handleFetchRequest(event.request));
 };
 
@@ -166,9 +167,9 @@ _self.addEventListener('install', onInstall);
 
 _self.addEventListener('activate', onActive);
 
-_self.addEventListener('message', onMessage);
-
 _self.addEventListener('fetch', onFetch);
+
+_self.addEventListener('message', onMessage);
 
 _self.addEventListener('push', onPush);
 
