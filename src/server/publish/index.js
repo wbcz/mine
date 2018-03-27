@@ -5,6 +5,7 @@ import Router from 'koa-router';
 import bodyParser from 'co-body';
 import webPush from 'web-push';
 
+//curl -H "Content-Type:application/json" -X POST --data '{"body": "sunshine", "link": "https://wbcz.me", "title": "谢谢关注谢谢关注谢谢关注谢谢关 注"}' http://localhost:3000/publish/broadcast
 import { gcmAPIKey } from '../config';
 
 const publishApp = new Koa();

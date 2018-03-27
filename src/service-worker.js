@@ -7,7 +7,9 @@ const CACHE_HOST = [HOST_NAME, 'cdn.bootcss.com'];
 const SUBSCRIBE_API = '/publish/subscribe';
 
 const sentMessage = function (msg) {
+    //向所有的客户端广播
     _self.clients.matchAll().then(function (clients) {
+        console.log(clients, 'clients')
         clients.forEach(function (client) {
             client.postMessage(msg);
         })
@@ -44,9 +46,12 @@ const onActive = function (event) {
 };
 
 const onMessage = function (event) {
-    console.log(event.data);
-
-    event.ports[0].postMessage('Hi, buddy.');
+    console.log(event.data, '6666666');
+    sentMessage({
+        command: 'broadcastOnRequest',
+        message: 'This is a broadcast on request from the SW'
+    })
+    // event.ports[0].postMessage('Hi, buddy.');
 };
 
 const isNeedCache = function (req) {

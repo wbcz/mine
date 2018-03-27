@@ -1,7 +1,8 @@
 <template>
     <div @click="trigger">
-        <topics ref="topics"></topics>
+        <router-view></router-view>
     </div>
+
 </template>
 <script>
     import topics from './components/topics.vue'
