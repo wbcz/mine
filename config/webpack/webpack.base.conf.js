@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const resolve = dir => {
@@ -41,6 +42,11 @@ module.exports = {
         ]),
         new CopyWebpackPlugin([
             { from: resolve('src/service-worker.js')}
-        ])
+        ]),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+            }
+        })
     ]
 }

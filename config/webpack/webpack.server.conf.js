@@ -3,6 +3,7 @@ const merge = require('webpack-merge')
 const base = require('./webpack.base.conf.js')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
+const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
 
 const resolve = dir => {
     return path.join(__dirname, '../..', dir)
@@ -25,6 +26,7 @@ module.exports = merge(base, {
                 js: "client.js"
             },
             excludeChunks: ['server']
-        })
+        }),
+        new VueSSRServerPlugin()
     ]
 })

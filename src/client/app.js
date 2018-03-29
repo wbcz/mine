@@ -18,7 +18,7 @@ const routes = [
 const router = new vueRouter({
     routes
 })
-
+console.log(7777)
 export default function () {
     const store = createStore()
     const app = new Vue({
