@@ -23,8 +23,6 @@ const serverBundleFileName = 'vue-ssr-server-bundle.json';
 const clientManifestFilePath = path.join(clientConfig.output.path, clientManifestFileName);
 const serverBundleFilePath = path.join(serverConfig.output.path, serverBundleFileName);
 
-console.log(serverBundleFilePath, 'serverBundleFilePath')
-
 const config = require('../../../config/webpack/webpack.client.conf')
 const compiler = webpack(config)
 
@@ -77,10 +75,9 @@ const updateRenderer = () => {
             clientManifest: JSON.parse(expressDevMiddleware.fileSystem.readFileSync(clientManifestFilePath, 'utf-8'))
         };
         createBundleRenderer(JSON.parse(mfs.readFileSync(serverBundleFilePath, 'utf-8')), { template }, options )
-
     } catch (e) {
-        // createBundleRenderer(JSON.parse(mfs.readFileSync(serverBundleFilePath, 'utf-8')), { template }, options)
-        // createRenderer(JSON.parse(mfs.readFileSync(serverBundleFilePath, 'utf-8')));
+        //这里一定要try catch 
+        // createBundleRenderer(JSON.parse(mfs.readFileSync(serverBundleFilePath, 'utf-8')));
     }
 };
 
