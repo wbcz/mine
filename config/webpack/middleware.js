@@ -1,34 +1,23 @@
-
-
-
-import webpack from 'webpack'
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import MFS from 'memory-fs';
-import { PassThrough } from 'stream';
-import path from 'path';
-import fs from 'fs';
-import LRU from 'lru-cache';
-import { createBundleRenderer } from 'vue-server-renderer';
-import clientConfig from '../../../config/webpack/webpack.client.conf'
-import serverConfig from '../../../config/webpack/webpack.server.conf'
-import { SOURCE_PATH, clientManifestFileName, serverBundleFileName } from '../../../config/webpack/setting'
+const webpack = require('webpack')
+const LRU = require('lru-cache')
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+const MFS = require('memory-fs')
+const { PassThrough } = require('stream')
+const path = require('path')
+const fs = require('fs')
+const { createBundleRenderer } = require('vue-server-renderer')
+const clientConfig = require('./client')
+const serverConfig = require('./server')
+const { SOURCE_PATH, clientManifestFileName, serverBundleFileName } = require('./setting')
 
 const indexTemplatePath = path.join(SOURCE_PATH, './server/', 'index.html');
 const template = fs.readFileSync(indexTemplatePath, 'utf8');
-
-console.log(indexTemplatePath, 'indexTemplatePath')
-
-const mfs = new MFS();
 const clientManifestFilePath = path.join(clientConfig.output.path, clientManifestFileName);
 const serverBundleFilePath = path.join(serverConfig.output.path, serverBundleFileName);
-// const clientConfig = require('../../../config/webpack/webpack.client.conf')
-// const compiler = webpack(clientConfig)
 
-
-
-let expressDevMiddleware;
-let renderer
+let expressDevMiddleware, renderer;
+const mfs = new MFS();
 
 const createRenderer = function (bundle, options = {}) {
     renderer = createBundleRenderer(bundle, Object.assign({
@@ -39,6 +28,7 @@ const createRenderer = function (bundle, options = {}) {
         runInNewContext: false
     }, options));
 };
+
 const updateRenderer = () => {
     try {
         const options = {
@@ -83,7 +73,7 @@ const koaWebpackHotMiddleware = (compiler, opts) => {
 
 const clientCompiler = webpack(clientConfig);
 
-const wdm = koaWebpackDevMiddleware(clientCompiler, {
+const devMiddleware = koaWebpackDevMiddleware(clientCompiler, {
     // display no info to console (only warnings and errors)
     noInfo: false,
     stats: {
@@ -96,7 +86,7 @@ const wdm = koaWebpackDevMiddleware(clientCompiler, {
 
 clientCompiler.plugin('done', updateRenderer);
 
-const whm = koaWebpackHotMiddleware(clientCompiler, {});
+const hotMiddleware = koaWebpackHotMiddleware(clientCompiler, {});
 
 // watch and update server renderer
 const serverCompiler = webpack(serverConfig);
@@ -109,15 +99,12 @@ serverCompiler.watch({}, (err, stats) => {
     updateRenderer();
 });
 
-
 const renderServer = async ctx => {
     const context = { url: ctx.url };
-    console.log(context, 'context')
-    // Have to create a promise, because koa don't wait for render callback
     await new Promise((resolve, reject) => {
         renderer.renderToString(
             context,
-            (error, vueApp) => {
+            (error, res) => {
                 if (error) {
                     if (error.code === '404') {
                         ctx.status = 404;
@@ -126,11 +113,11 @@ const renderServer = async ctx => {
                     }
                 } else {
                     ctx.type = 'text/html';
-                    ctx.body = vueApp;
+                    ctx.body = res;
                 }
                 resolve();
             });
     });
 };
 
-export { renderServer, wdm, whm }
+module.exports =  { renderServer, devMiddleware, hotMiddleware }

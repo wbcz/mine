@@ -1,6 +1,6 @@
 
 const merge = require('webpack-merge')
-const base = require('./webpack.base.conf.js')
+const base = require('./base.js')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
@@ -15,20 +15,11 @@ module.exports = merge(base, {
         server: resolve('/src/entry-server.js')
     },
     output: {
-        // filename: '[name].js',
-        filename: 'server.bundle.js',
+        filename: '[name].js',
         libraryTarget: 'commonjs2'
     },
     externals: Object.keys(require(resolve('/package.json')).dependencies),
     plugins: [
-        // new HtmlWebpackPlugin({
-        //     template: resolve('/src/server/index.html'),
-        //     filename: 'index.ssr.html',
-        //     files: {
-        //         js: "client.js"
-        //     },
-        //     excludeChunks: ['server']
-        // }),
         new VueSSRServerPlugin()
     ]
 })
