@@ -11,7 +11,7 @@ const clientConfig = require('./client')
 const serverConfig = require('./server')
 const { SOURCE_PATH, clientManifestFileName, serverBundleFileName } = require('./setting')
 
-const indexTemplatePath = path.join(SOURCE_PATH, './server/', 'index.html');
+const indexTemplatePath = path.join(SOURCE_PATH, '/index.html');
 const template = fs.readFileSync(indexTemplatePath, 'utf8');
 const clientManifestFilePath = path.join(clientConfig.output.path, clientManifestFileName);
 const serverBundleFilePath = path.join(serverConfig.output.path, serverBundleFileName);
