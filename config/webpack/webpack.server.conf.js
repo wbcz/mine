@@ -19,15 +19,16 @@ module.exports = merge(base, {
         filename: 'server.bundle.js',
         libraryTarget: 'commonjs2'
     },
+    externals: Object.keys(require(resolve('/package.json')).dependencies),
     plugins: [
-        new HtmlWebpackPlugin({
-            template: resolve('/src/server/index.html'),
-            filename: 'index.ssr.html',
-            files: {
-                js: "client.js"
-            },
-            excludeChunks: ['server']
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: resolve('/src/server/index.html'),
+        //     filename: 'index.ssr.html',
+        //     files: {
+        //         js: "client.js"
+        //     },
+        //     excludeChunks: ['server']
+        // }),
         new VueSSRServerPlugin()
     ]
 })

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import vueRouter from 'vue-router'
 import createStore from './store.js'
-import './common/service/ServiceWorker';
+// import './common/service/ServiceWorker';
 import Foo from './pages/foo.vue'
 import Bar from './pages/bar.vue'
 import Topics from './components/topics.vue'

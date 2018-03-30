@@ -10,23 +10,13 @@ import { renderServer, wdm, whm }  from './middleware/webpack-middleware'
 const app = new Koa()
 const PUBLIC_PATH = path.resolve(__dirname, '../client')
 app.use(serve(PUBLIC_PATH))
-
 app.use(mount('/publish', publish))
-
-// app.use(route.get('/', async (ctx, next) => {
-//     await new Promise((resolve, reject) => {
-//         html = fs.readFileSync(path.resolve(__dirname, '../../dist/index.html'), 'utf-8');
-//         ctx.body = html;
-//         resolve()
-//     })
-// }))
-
 app.use(wdm)
 app.use(whm)
 
 app.use(renderServer)
 
-app.listen(3000, () => {
-    console.log('server is running on port 3000')
+app.listen(3001, () => {
+    console.log('server is running on port 3001')
 });
 console.log(333)

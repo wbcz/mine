@@ -18,10 +18,10 @@ const webPackClientConfig = merge(base, {
         client: [resolve('/src/entry-client.js')]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: resolve('/src/client/index.html'),
-            filename: 'index.html'
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: resolve('/src/client/index.html'),
+        //     filename: 'index.html'
+        // }),
         new VueSSRClientPlugin()
     ]
 })

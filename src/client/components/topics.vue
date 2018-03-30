@@ -24,8 +24,8 @@
             }
         },
         created() {
-            this.$store.dispatch('fetchTopics')
-            console.log('bar created242')
+            // this.$store.dispatch('fetchTopics')
+            // console.log('bar created242')
         }
     }
 </script>
