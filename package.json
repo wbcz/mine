@@ -34,7 +34,8 @@
         "vuex": "^3.0.1",
         "web-push": "^3.3.0",
         "webpack": "3.10",
-        "webpack-hot-middleware": "^2.21.0"
+        "webpack-dev-middleware": "^1.10.0",
+        "webpack-hot-middleware": "^2.18.0"
     },
     "devDependencies": {
         "babel-cli": "^6.24.1",
@@ -60,7 +61,6 @@
         "vue-server-renderer": "^2.5.13",
         "vue-template-compiler": "^2.5.13",
         "webpack-cli": "^2.0.13",
-        "webpack-dev-middleware": "^2.0.4",
         "webpack-merge": "^4.1.1"
     }
 }

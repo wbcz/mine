@@ -19,14 +19,12 @@ const stringifySubscriptions = subscriptions => subscriptions.map(item => JSON.s
 const readSubscriptions = () =>
     new Promise(resolve => {
         fs.readFile(SUBSCRIPTION_FILE, 'utf8', (err, buffer) => {
-            console.log(err, 'err')
             if (err) {
                 resolve([]);
             }
             else {
                 const string = buffer.toString();
                 const subscriptions = parseSubscriptions(string);
-                console.log(subscriptions, 'subscriptions66666666666')
                 resolve(subscriptions);
             }
         });
@@ -34,11 +32,8 @@ const readSubscriptions = () =>
     
 const writeSubscription = subscriptions =>
     new Promise((resolve, reject) => {
-        console.log(subscriptions, '费汗臭')
         fs.writeFile(SUBSCRIPTION_FILE, stringifySubscriptions(subscriptions), 'utf8', err => {
-            console.log(err, '999999')
             if (err) reject(err);
-
             resolve();
         });
     });
@@ -49,7 +44,6 @@ const addSubscription = subscription =>
             if (!subscriptions.find(item => item.endpoint === subscription.endpoint)) {
                 subscriptions.push(subscription);
             }
-            console.log(subscriptions, '4567890')
             //console.log(subscriptions, 'subscriptions')
             return subscriptions;
         })
@@ -121,5 +115,4 @@ publishApp
     .use(router.routes())
     .use(router.allowedMethods());
 
-console.log(Koa, 'publishApp')
 export default publishApp;

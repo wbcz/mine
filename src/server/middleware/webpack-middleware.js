@@ -12,35 +12,20 @@ import fs from 'fs';
 import { createBundleRenderer } from 'vue-server-renderer';
 import clientConfig from '../../../config/webpack/webpack.client.conf'
 import serverConfig from '../../../config/webpack/webpack.server.conf'
+import { SOURCE_PATH, clientManifestFileName, serverBundleFileName} from '../../../config/webpack/setting'
 import convert from 'koa-convert'
-const indexTemplatePath = path.join(__dirname, '../../../dist/',  '/index.html');
+const indexTemplatePath = path.join(SOURCE_PATH, './server/',  'index.html');
 const template = fs.readFileSync(indexTemplatePath, 'utf8');
 
-const mfs = new MFS();
-const clientManifestFileName = 'vue-ssr-client-manifest.json';
-const serverBundleFileName = 'vue-ssr-server-bundle.json';
+console.log(indexTemplatePath, 'indexTemplatePath')
 
+const mfs = new MFS();
 const clientManifestFilePath = path.join(clientConfig.output.path, clientManifestFileName);
 const serverBundleFilePath = path.join(serverConfig.output.path, serverBundleFileName);
-
 const config = require('../../../config/webpack/webpack.client.conf')
 const compiler = webpack(config)
 
 let expressDevMiddleware;
-const koaWebpackDevMiddleware = (compiler, opts) => {
-    expressDevMiddleware = webpackDevMiddleware(compiler, opts);
-    return async (ctx, next) => {
-        await new Promise(resolve =>
-            expressDevMiddleware(ctx.req, {
-                end: (content) => {
-                    ctx.body = content;
-                    resolve();
-                },
-                setHeader: ctx.set.bind(ctx)
-            }, () => resolve(next()))
-        );
-    };
-};
 
 const koaWebpackHotMiddleware = (compiler, opts) => {
     const expressMiddleware = webpackHotMiddleware(compiler, opts);
@@ -57,6 +42,22 @@ const koaWebpackHotMiddleware = (compiler, opts) => {
     }
 };
 
+const koaWebpackDevMiddleware = (compiler, opts) => {
+    expressDevMiddleware = webpackDevMiddleware(compiler, opts);
+    return async (ctx, next) => {
+        await new Promise(resolve =>
+            expressDevMiddleware(ctx.req, {
+                end: (content) => {
+                    ctx.body = content;
+                    resolve();
+                },
+                setHeader: ctx.set.bind(ctx)
+            }, () => resolve(next()))
+        );
+    };
+};
+
+
 const wdm = koaWebpackDevMiddleware(compiler, {
     // display no info to console (only warnings and errors)
     noInfo: false,
@@ -65,19 +66,21 @@ const wdm = koaWebpackDevMiddleware(compiler, {
         cached: false
     },
     contentBase: clientConfig.output.path,
-    publicPath: clientConfig.output.publicPath
+    // publicPath: clientConfig.output.publicPath
 });
+
 const whm = koaWebpackHotMiddleware(compiler, {});
 
 const updateRenderer = () => {
+    console.log(clientManifestFilePath, 'clientManifestFilePath')
+
     try {
         const options = {
             clientManifest: JSON.parse(expressDevMiddleware.fileSystem.readFileSync(clientManifestFilePath, 'utf-8'))
         };
         createBundleRenderer(JSON.parse(mfs.readFileSync(serverBundleFilePath, 'utf-8')), { template }, options )
     } catch (e) {
-        //这里一定要try catch 
-        // createBundleRenderer(JSON.parse(mfs.readFileSync(serverBundleFilePath, 'utf-8')));
+        createBundleRenderer(JSON.parse(mfs.readFileSync(serverBundleFilePath, 'utf-8')));
     }
 };
 
@@ -90,6 +93,7 @@ const renderServer = async ctx => {
             if (err) {
                 reject(err)
             } else {
+                console.log(res, '消愁')
                 ctx.type = 'text/html'
                 ctx.body = res
             }

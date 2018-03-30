@@ -15,7 +15,7 @@ module.exports = {
         }
     },
     output: {
-        path: resolve('/dist'),
+        path: resolve('/build/client/'),
         filename: '[name].js'
     },
     module: {

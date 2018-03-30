@@ -1,6 +1,6 @@
 <template>
     <div class='bar'>
-        <h1>CNode44.77777</h1>
+        <h1>CNode44.777</h1>
         <div v-for="topic in topics">
             <p v-html="topic.content"></p>
         </div>
