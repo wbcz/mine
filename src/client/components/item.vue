@@ -1,9 +1,6 @@
 <template>
     <div class='bar'>
-        <h1>CNode44.77997</h1>
-        <div v-for="topic in topics">
-            <p v-html="topic.content"></p>
-        </div>
+        <h1>item</h1>
     </div>
 </template>
 <style>
@@ -14,15 +11,10 @@
 
 <script lang="ts">
     import Vue from 'vue'
-    import item from './item.vue'
     import Component from 'vue-class-component'
 
-    @Component({
-        components: {
-            item
-        }
-    })
-    export default class topic  extends Vue{
+    @Component
+    export default class item  extends Vue{
         // asyncData({store}) {
         //     return store.dispatch('fetchTopics')
         // }

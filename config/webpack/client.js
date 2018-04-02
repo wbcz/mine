@@ -15,7 +15,7 @@ const resolve = dir => {
 
 const webPackClientConfig = merge(base, {
     entry: {
-        client: [resolve('/src/entry-client.js')]
+        client: [resolve('/src/entry-client.ts')]
     },
     plugins: [
         new VueSSRClientPlugin()

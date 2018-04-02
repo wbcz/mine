@@ -8,7 +8,7 @@ const resolve = dir => {
 
 module.exports = {
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
+        extensions: ['.js', '.vue', '.json', '.ts', '.tsx'],
         alias: {
             vue: 'vue/dist/vue.js',
             '@': resolve('src')
@@ -20,6 +20,17 @@ module.exports = {
     },
     module: {
         rules: [
+            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+            // {   test: /\.tsx?$/,
+            //     loader: "awesome-typescript-loader"
+            // },
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                options: {
+                    appendTsSuffixTo: [/\.vue$/],
+                }
+            },
             {
                 test: /\.vue$/,
                 loader: 'vue-loader'
