@@ -6991,6 +6991,10 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "http://r.cnpmjs.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
+vue-typescript-import-dts@^3.1.1:
+  version "3.1.1"
+  resolved "http://r.cnpmjs.org/vue-typescript-import-dts/download/vue-typescript-import-dts-3.1.1.tgz#bfbc5d48b33921e94a63e1209b88134f9ec78ab4"
+
 vue@^2.5.13:
   version "2.5.13"
   resolved "http://r.cnpmjs.org/vue/download/vue-2.5.13.tgz#95bd31e20efcf7a7f39239c9aa6787ce8cf578e1"

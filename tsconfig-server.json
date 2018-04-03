@@ -14,7 +14,7 @@
                 "client/components/*"
             ],
             "containers/*": [
-                "client/containers/*"
+                "client/pages/*"
             ],
             "vuexModule/*": [
                 "client/vuex/module/*"
@@ -37,7 +37,10 @@
         ]
     },
     "include": [
-        "src/server/**/*.ts",
+        "src/**/*.ts",
         "src/types/*"
+    ],
+    "exclude": [
+        "node_modules/*"
     ]
 }

@@ -1,16 +1,16 @@
 
 import Vue from 'vue'
-import App from './client/App.vue'
-import createStore from './client/store'
+import { app } from './client/app'
+// import createStore from './client/store'
 
 export default function (context) {
-    const store = createStore()
-    let app = new Vue({
-        store,
-        render: h => h(App)
-    })
+    // const store = createStore()
+    // let app = new Vue({
+    //     store,
+    //     render: h => h(App)
+    // })
     // 找到所有 prefetchData 方法
-    let components = App.components
+    let components = app.components
     let prefetchFns = []
     for (let key in components) {
         if (!components.hasOwnProperty(key)) continue
@@ -22,7 +22,7 @@ export default function (context) {
         }
     }
 
-    return Promise.all(prefetchFns).then((res) => {
+    return Promise.all(prefetchFns).then(res => {
         context.state = store.state
         return app
     })

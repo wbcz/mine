@@ -9,7 +9,7 @@
         "client": "webpack --config webpack.client.conf.js",
         "build": "rm -rf ./dist && webpack --config config/webpack/webpack.client.conf.js && webpack --config config/webpack/webpack.server.conf.js",
         "dev": "docker-compose down --volume && docker-compose up --build",
-        "start": "tsc -p  tsconfig-server.json && npm run copy:posts && babel src/server -w -d build/server --no-babelrc --presets=es2017 --presets=es2015,stage-3 --plugins=transform-runtime & nodemon --watch build --delay 2 build/server/index.js",
+        "start": "tsc -p tsconfig-server.json && npm run copy:posts && babel src/server -w -d build/server --no-babelrc --presets=es2017 --presets=es2015,stage-3 --plugins=transform-runtime & nodemon --watch build --delay 2 build/server/index.js",
         "prod": "pm2 start src/server/index.js",
         "deploy": "scp -r ../mine/.  root@45.76.7.65:/mine/"
     },
@@ -20,6 +20,7 @@
         "axios": "^0.17.1",
         "express": "^4.16.2",
         "fs": "^0.0.1-security",
+        "jsdom": "^9.12.0",
         "koa": "^2.4.1",
         "koa-convert": "^1.2.0",
         "koa-mount": "2.0.0",
@@ -36,12 +37,12 @@
         "vue-class-component": "^6.2.0",
         "vue-loader": "^14.2.2",
         "vue-router": "^3.0.1",
+        "vue-typescript-import-dts": "^3.1.1",
         "vuex": "^3.0.1",
         "web-push": "^3.3.0",
         "webpack": "3.10",
         "webpack-dev-middleware": "1.11.0",
-        "webpack-hot-middleware": "^2.18.0",
-        "jsdom": "^9.12.0"
+        "webpack-hot-middleware": "^2.18.0"
     },
     "devDependencies": {
         "babel-cli": "^6.24.1",

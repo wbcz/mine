@@ -10,8 +10,13 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.vue', '.json', '.ts', '.tsx'],
         alias: {
-            vue: 'vue/dist/vue.js',
-            '@': resolve('src')
+            'vue': 'vue/dist/vue.js',
+            '@': resolve('src'),
+            'assets': resolve('src') + '/client/assets',
+            'common': resolve('src') + '/client/common',
+            'components': resolve('src/client/components'),
+            'pages': resolve('src') + '/client/pages',
+            'vuexModule': resolve('src') + '/client/vuex/module'
         }
     },
     output: {
