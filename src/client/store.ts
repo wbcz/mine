@@ -1,13 +1,13 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import config from './api/index.js'
-import $http from './api/http.js'
+import config from './api/index'
+import $http from './api/http'
 
 Vue.use(Vuex)
 
-function fetchTopics() {
+function fetchTopics(page: Object) {
     return new Promise( (resolve, reject) => {
-        $http.get(config.Api.getArticleList, {page: 1}).then(topics => {
+        $http.get(config.Api.getArticleList, page as string).then((topics: any) => {
             resolve(topics.data.data)
         })
     })
@@ -20,7 +20,7 @@ export default function createStore() {
         },
         actions: {
             fetchTopics({ commit }) {
-                return fetchTopics().then(topics => {
+                return fetchTopics({page: 1}).then((topics: any) => {
                     commit('setTopics', { topics })
                 })
             }

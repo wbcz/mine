@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import vueRouter from 'vue-router'
-import createStore from './store.js'
+import createStore from './store'
 // import './common/service/ServiceWorker';
-// import Foo from './pages/foo.vue'
-// import Bar from './pages/bar.vue'
+import Foo from 'pages/foo.vue'
+import Bar from 'pages/bar.vue'
 
-import 'pages/blog';
+import 'pages/index';
 
-// Vue.use(vueRouter)
+Vue.use(vueRouter)
 export default function () {
     const store = createStore()
     const app = new Vue({
@@ -20,9 +20,8 @@ export default function () {
                         id: 'app',
                     },
                 },
-                [h('blog')],
+                [h('index')],
             )
-        // render: h => h(App)
     })
     return { app, store }
 }

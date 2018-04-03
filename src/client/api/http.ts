@@ -1,9 +1,9 @@
 import axios from 'axios'
 import qs from 'qs'
-import config from './index.js'
+import config from './index'
 
 export default {
-    post(url, data) {
+    post(url: string, data: Object) {
         return axios({
             method: 'post',
             url: url,
@@ -15,7 +15,7 @@ export default {
             }
         })
     },
-    get(url, params) {
+    get(url: string, params: string) {
         return axios({
             method: 'get',
             url: url,

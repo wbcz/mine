@@ -13,11 +13,8 @@
             "components/*": [
                 "client/components/*"
             ],
-            "containers/*": [
+            "pages/*": [
                 "client/pages/*"
-            ],
-            "vuexModule/*": [
-                "client/vuex/module/*"
             ]
         },
         "module": "es2015",
@@ -40,6 +37,9 @@
         "src/**/*.ts",
         "src/**/**/*.ts",
         "src/client/pages/**/*.ts",
-        "src/types/*"
+        "src/client/pages/*",
+        "src/types/*",
+        "src/server/**/*.ts",
+        "src/server/*.ts"
     ]
 }

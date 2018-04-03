@@ -16,9 +16,11 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@types/qs": "^6.5.1",
         "awesome-typescript-loader": "^4.0.1",
         "axios": "^0.17.1",
         "express": "^4.16.2",
+        "file-loader": "^1.1.11",
         "fs": "^0.0.1-security",
         "html-loader": "^0.5.5",
         "jsdom": "^9.12.0",

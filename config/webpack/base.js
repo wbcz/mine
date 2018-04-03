@@ -44,6 +44,13 @@ module.exports = {
                 test: /\.html$/,
                 loader: 'html-loader?interpolate',
                 exclude: /node_modules/
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                use: [
+                    'file-loader?hash=sha512&digest=hex&name=[path][name]-[hash:8].[ext]',
+                    'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                ]
             }
         ]
     },
