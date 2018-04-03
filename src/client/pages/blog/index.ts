@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-// import template from './blog.html';
+import template from './blog.html';
 
 @Component({
-    template: '<div>333</div>'
+    template
 })
 
 class BlogContainer extends Vue {

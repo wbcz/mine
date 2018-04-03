@@ -20,3 +20,9 @@ declare global {
     }
 }
 
+// declare module 'vue/types/options' {
+//     interface ComponentOptions<V extends Vue> {
+//         preFetch?: (store: Store<IRootState>, router?: VueRouter) => Promise<any>
+//     }
+// }
+

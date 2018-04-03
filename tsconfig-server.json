@@ -24,6 +24,7 @@
         "moduleResolution": "node",
         "removeComments": true,
         "preserveConstEnums": true,
+        "experimentalDecorators": true,
         "sourceMap": true,
         "strict": true,
         "target": "es5",
@@ -39,7 +40,7 @@
     "include": [
         "src/**/*.ts",
         "src/types/*",
-        "src/**/**/*.ts"
+        "src/client/pages/**/*.ts"
     ],
     "exclude": [
         "node_modules/*"

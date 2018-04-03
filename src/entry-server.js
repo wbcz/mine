@@ -1,14 +1,9 @@
 
 import Vue from 'vue'
-import { app } from './client/app'
-// import createStore from './client/store'
+import createApp from './client/app'
+const { app, store} = createApp()
 
 export default function (context) {
-    // const store = createStore()
-    // let app = new Vue({
-    //     store,
-    //     render: h => h(App)
-    // })
     // 找到所有 prefetchData 方法
     let components = app.components
     let prefetchFns = []
