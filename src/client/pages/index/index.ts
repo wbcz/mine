@@ -6,6 +6,8 @@ import template from './index.html';
     template
 })
 
-class BlogContainer extends Vue {}
+class BlogContainer extends Vue {
+    
+}
 
 export default Vue.component('index', BlogContainer);

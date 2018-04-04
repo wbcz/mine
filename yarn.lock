@@ -1389,23 +1389,6 @@ chokidar@^1.6.1:
   optionalDependencies:
     fsevents "^1.0.0"
 
-chokidar@^2.0.0:
-  version "2.0.0"
-  resolved "http://r.cnpmjs.org/chokidar/download/chokidar-2.0.0.tgz#6686313c541d3274b2a5c01233342037948c911b"
-  dependencies:
-    anymatch "^2.0.0"
-    async-each "^1.0.0"
-    braces "^2.3.0"
-    glob-parent "^3.1.0"
-    inherits "^2.0.1"
-    is-binary-path "^1.0.0"
-    is-glob "^4.0.0"
-    normalize-path "^2.1.1"
-    path-is-absolute "^1.0.0"
-    readdirp "^2.0.0"
-  optionalDependencies:
-    fsevents "^1.0.0"
-
 chokidar@^2.0.2:
   version "2.0.3"
   resolved "http://r.cnpmjs.org/chokidar/download/chokidar-2.0.3.tgz#dcbd4f6cbb2a55b4799ba8a840ac527e5f4b1176"
@@ -4653,18 +4636,19 @@ node-pre-gyp@^0.6.39:
     tar "^2.2.1"
     tar-pack "^3.4.0"
 
-nodemon@^1.14.11:
-  version "1.14.11"
-  resolved "http://r.cnpmjs.org/nodemon/download/nodemon-1.14.11.tgz#cc0009dd8d82f126f3aba50ace7e753827a8cebc"
+nodemon@^1.17.3:
+  version "1.17.3"
+  resolved "http://r.cnpmjs.org/nodemon/download/nodemon-1.17.3.tgz#3b0bbc2ee05ccb43b1aef15ba05c63c7bc9b8530"
   dependencies:
-    chokidar "^2.0.0"
+    chokidar "^2.0.2"
     debug "^3.1.0"
     ignore-by-default "^1.0.1"
     minimatch "^3.0.4"
     pstree.remy "^1.1.0"
-    semver "^5.4.1"
+    semver "^5.5.0"
+    supports-color "^5.2.0"
     touch "^3.1.0"
-    undefsafe "^2.0.1"
+    undefsafe "^2.0.2"
     update-notifier "^2.3.0"
 
 nomnom@^1.8.1:
@@ -6048,7 +6032,7 @@ semver-diff@^2.0.0:
   version "5.5.0"
   resolved "http://r.cnpmjs.org/semver/download/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
 
-semver@^5.0.3, semver@^5.1.0, semver@^5.3.0, semver@^5.4.1:
+semver@^5.0.3, semver@^5.1.0, semver@^5.3.0:
   version "5.4.1"
   resolved "http://r.cnpmjs.org/semver/download/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
 
@@ -6484,7 +6468,7 @@ supports-color@^5.1.0:
   dependencies:
     has-flag "^2.0.0"
 
-supports-color@^5.3.0:
+supports-color@^5.2.0, supports-color@^5.3.0:
   version "5.3.0"
   resolved "http://r.cnpmjs.org/supports-color/download/supports-color-5.3.0.tgz#5b24ac15db80fa927cf5227a4a33fd3c4c7676c0"
   dependencies:
@@ -6769,9 +6753,9 @@ uid-number@^0.0.6:
   version "0.0.6"
   resolved "http://r.cnpmjs.org/uid-number/download/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
-undefsafe@^2.0.1:
-  version "2.0.1"
-  resolved "http://r.cnpmjs.org/undefsafe/download/undefsafe-2.0.1.tgz#03b2f2a16c94556e14b2edef326cd66aaf82707a"
+undefsafe@^2.0.2:
+  version "2.0.2"
+  resolved "http://r.cnpmjs.org/undefsafe/download/undefsafe-2.0.2.tgz#225f6b9e0337663e0d8e7cfd686fc2836ccace76"
   dependencies:
     debug "^2.2.0"
 

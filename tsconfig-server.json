@@ -1,48 +1,42 @@
 {
-    "compilerOptions": {
-        "allowJs": true,
-        "allowSyntheticDefaultImports": true,
-        "baseUrl": "./src",
-        "paths": {
-            "assets/*": [
-                "client/assets/*"
-            ],
-            "common/*": [
-                "client/common/*"
-            ],
-            "components/*": [
-                "client/components/*"
-            ],
-            "containers/*": [
-                "client/pages/*"
-            ],
-            "vuexModule/*": [
-                "client/vuex/module/*"
-            ]
-        },
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "removeComments": true,
-        "preserveConstEnums": true,
-        "experimentalDecorators": true,
-        "sourceMap": true,
-        "strict": true,
-        "target": "es5",
-        "outDir": "./build",
-        "lib": [
-            "dom",
-            "es5",
-            "es2015",
-            "es2017.object",
-            "esnext.asynciterable"
-        ]
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
+    "paths": {
+      "assets/*": [
+        "client/assets/*"
+      ],
+      "common/*": [
+        "client/common/*"
+      ],
+      "components/*": [
+        "client/components/*"
+      ],
+      "pages/*": [
+        "client/pages/*"
+      ]
     },
-    "include": [
-        "src/types/*",
-        "src/server/**/*.ts",
-        "src/server/*.ts"
-    ],
-    "exclude": [
-        "node_modules/*"
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "experimentalDecorators": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es5",
+    "outDir": "./build",
+    "lib": [
+      "dom",
+      "es5",
+      "es2015",
+      "es2017.object",
+      "esnext.asynciterable"
     ]
+  },
+  "include": [
+    "src/types/*",
+    "src/server/**/*.ts",
+    "src/server/*.ts"
+  ]
 }
