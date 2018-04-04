@@ -19,8 +19,8 @@
     },
     "module": "commonjs",
     "moduleResolution": "node",
-    "removeComments": true,
     "experimentalDecorators": true,
+    "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "strict": true,
@@ -35,8 +35,7 @@
     ]
   },
   "include": [
-    "src/types/*",
-    "src/server/**/*.ts",
-    "src/server/*.ts"
+    "src/**/**/*.ts",
+    "src/types/*"
   ]
 }

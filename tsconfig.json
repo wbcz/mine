@@ -35,5 +35,8 @@
     },
     "include": [
         "src/**/*.ts"
+    ],
+    "exclude": [
+        "src/server/**/*.ts"
     ]
 }
