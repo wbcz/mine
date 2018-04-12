@@ -6,6 +6,7 @@ import './common/service/ServiceWorker';
 import Foo from './pages/foo.vue'
 import Bar from './pages/bar.vue'
 import Topics from './components/topics.vue'
+import 'babel-polyfill';
 
 Vue.use(vueRouter)
 

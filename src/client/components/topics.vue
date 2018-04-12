@@ -22,7 +22,12 @@
                 return this.$store.state.topics
             }
         },
-        created() {
+        async created() {
+            async function tss() {
+                console.log(await Promise.resolve(3))
+            }
+            let test = await tss()
+            
             // this.$store.dispatch('fetchTopics')
             // console.log('bar created242')
         }
