@@ -13,7 +13,6 @@
 <script>
     export default {
         created() {
-            
             //接收从service-worker来的data
             navigator.serviceWorker.onmessage = function name(params) {
                 console.log(params, 'barfoooooo')

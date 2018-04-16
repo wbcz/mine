@@ -1,23 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import vueRouter from 'vue-router'
 import createStore from './store.js'
-import './common/service/ServiceWorker';
-import Foo from './pages/foo.vue'
-import Bar from './pages/bar.vue'
-import Topics from './components/topics.vue'
-
-Vue.use(vueRouter)
-
-const routes = [
-    { path: '/foo', component: Foo },
-    { path: '/bar', component: Bar },
-    { path: '/', component: Topics },
-]
- 
-const router = new vueRouter({
-    routes
-})
+// import './common/service/ServiceWorker';
+import router from './router'
 
 export default function () {
     const store = createStore()
@@ -26,5 +11,5 @@ export default function () {
         router,
         render: h => h(App)
     })
-    return { app, store }
+    return { app, store, router }
 }

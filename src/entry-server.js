@@ -1,29 +1,30 @@
 
 import Vue from 'vue'
 import App from './client/App.vue'
+import createApp from './client/app'
 import createStore from './client/store'
 
-export default function (context) {
-    const store = createStore()
-    let app = new Vue({
-        store,
-        render: h => h(App)
-    })
-    // 找到所有 prefetchData 方法
-    let components = App.components
-    let prefetchFns = []
-    for (let key in components) {
-        if (!components.hasOwnProperty(key)) continue
-        let component = components[key]
-        if (component.asyncData) {
-            prefetchFns.push(component.asyncData({
-                store
-            }))
-        }
-    }
+const jsdom = require('jsdom').jsdom;
+global.document = jsdom('<!doctype html><html><body></body></html>');
+global.window = document.defaultView;
+global.navigator = window.navigator;
+global.fetch = require('node-fetch');
 
-    return Promise.all(prefetchFns).then((res) => {
+export default function (context) {
+    const { app, router, store } = createApp();
+    router.push(context.url)
+    console.log(context.url, 'context.url')
+    const matchedComponents = router.getMatchedComponents();
+    if (!matchedComponents.length) {
+        return Promise.reject({ code: '404' });
+    }
+    return Promise.all(matchedComponents.map(component => {
+        if (component.asyncData) {
+            return component.asyncData({store});
+        }
+    })).then(res => {
         context.state = store.state
         return app
     })
+
 }
