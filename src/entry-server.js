@@ -8,7 +8,6 @@ const jsdom = require('jsdom').jsdom;
 global.document = jsdom('<!doctype html><html><body></body></html>');
 global.window = document.defaultView;
 global.navigator = window.navigator;
-global.fetch = require('node-fetch');
 
 export default function (context) {
     const { app, router, store } = createApp();
@@ -26,5 +25,4 @@ export default function (context) {
         context.state = store.state
         return app
     })
-
 }

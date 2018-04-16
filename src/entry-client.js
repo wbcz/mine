@@ -1,11 +1,51 @@
 
 import createApp from './client/app.js'
+// import './client/common/service/ServiceWorker';
 
-const { app, store } = createApp()
+const { app, store, router } = createApp()
 
 if (window.__INITIAL_STATE__) {
     console.log(window.__INITIAL_STATE__, 'window.__INITIAL_STATE__')
     store.replaceState(window.__INITIAL_STATE__)
 }
 
-app.$mount('#app')
+store.replaceState(window.__INITIAL_STATE__);
+
+router.onReady(() => {
+    // Add router hook for handling asyncData.
+    // Doing it after initial route is resolved so that we don't double-fetch
+    // the data that we already have. Using router.beforeResolve() so that all
+    // async components are resolved.
+    console.log(999)
+    router.beforeResolve((to, from, next) => {
+        const matched = router.getMatchedComponents(to);
+        const prevMatched = router.getMatchedComponents(from);
+        console.log(matched, prevMatched, '3333')
+        // we only care about none-previously-rendered components,
+        // so we compare them until the two matched lists differ
+        let diffed = false;
+        const activated = matched.filter((c, i) => {
+            console.log(i, 'ii')
+            return diffed || (diffed = (prevMatched[i] !== c));
+        });
+        console.log(activated, 'activated')
+        if (!activated.length) {
+            return next();
+        }
+
+        // this is where we should trigger a loading indicator if there is one
+
+        Promise.all(activated.map(component => {
+            if (component.asyncData) {
+                return component.asyncData({store});
+            }
+        })).then(() => {
+            next();
+        }).catch(next);
+    });
+
+    app.$mount('#app');
+});
+
+
+// app.$mount('#app')

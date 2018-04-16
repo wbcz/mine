@@ -1,6 +1,7 @@
 <template>
     <div class='bar'>
-        <h1>CNode44.77997</h1>
+        <h1>CNode44.</h1>
+        <h1 @click="bar">bar</h1>
         <div v-for="topic in topics">
             <p v-html="topic.content"></p>
         </div>
@@ -11,6 +12,7 @@
         background: #9e9ecd;
     }
 </style>
+
 
 <script>
     export default {
@@ -30,6 +32,11 @@
             
             // this.$store.dispatch('fetchTopics')
             // console.log('bar created242')
+        },
+        methods: {
+            bar() {
+                this.$router.push('/bar')
+            }
         }
     }
 </script>

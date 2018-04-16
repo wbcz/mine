@@ -40,9 +40,9 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: resolve('src/manifest.json')}
         ]),
-        new CopyWebpackPlugin([
-            { from: resolve('src/service-worker.js')}
-        ]),
+        // new CopyWebpackPlugin([
+        //     { from: resolve('src/service-worker.js')}
+        // ]),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV)

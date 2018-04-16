@@ -14,15 +14,15 @@
     export default {
         created() {
             //接收从service-worker来的data
-            navigator.serviceWorker.onmessage = function name(params) {
-                console.log(params, 'barfoooooo')
-            }
+            // navigator.serviceWorker.onmessage = function name(params) {
+            //     console.log(params, 'barfoooooo')
+            // }
 
             //发出data到service-worker
-            navigator.serviceWorker.controller.postMessage({
-                cmd: 'broadcast'
-            })
-            console.log('bar来了')
+            // navigator.serviceWorker.controller.postMessage({
+            //     cmd: 'broadcast'
+            // })
+            // console.log('bar来了')
         }
     }
 </script>
