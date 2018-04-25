@@ -15,6 +15,7 @@
 
 
 <script>
+    import $http from '../api/http.js'
     export default {
         asyncData({store}) {
             return store.dispatch('fetchTopics')
@@ -32,6 +33,11 @@
             
             // this.$store.dispatch('fetchTopics')
             // console.log('bar created242')
+            return new Promise( (resolve, reject) => {
+                $http.get('http://localhost:3000/api/getUserInfo?uid=2').then(topics => {
+                    console.log(topics.data, 'data')
+                })
+            })
         },
         methods: {
             bar() {

@@ -26,6 +26,7 @@
         "koa-router": "^7.3.0",
         "koa-static": "^4.0.2",
         "memory-fs": "^0.3.0",
+        "mongoose": "^5.0.16",
         "node-fetch": "^2.1.2",
         "nodemon": "^1.14.11",
         "qs": "^6.5.1",
