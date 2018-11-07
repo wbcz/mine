@@ -8,9 +8,10 @@
         "copy:posts": "npm run clean && mkdir build && mkdir build/server && mkdir build/server/data && cp -r src/server/data/. build/server/data",
         "build": "npm run clean &&  babel src/server -d build/server --no-babelrc --plugins=transform-runtime --presets=es2015,stage-3 && webpack --config config/webpack/client.js && webpack --config config/webpack/server.js",
         "dev": "docker-compose down --volume && docker-compose up --build",
-        "start": "npm run copy:posts && babel src/server -w -d build/server --no-babelrc --plugins=transform-runtime --presets=es2015,stage-3 & nodemon --watch build --delay 2 build/server/index.js",
+        "start": "npm run copy:posts && babel src/server -w -d build/server --no-babelrc --plugins=transform-runtime --presets=es2015,stage-3 & nodemon --watch build --delay 2 build/server/",
         "prod": "pm2 start src/server/index.js",
-        "deploy": "scp -r ../mine/.  root@45.76.7.65:/mine/"
+
+        "deploy": "rsync -avP --exclude=node_modules/.  root@173.82.95.202:/mine/"
     },
     "author": "",
     "license": "ISC",

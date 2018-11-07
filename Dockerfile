@@ -1,4 +1,4 @@
-FROM node:v1
+FROM node:8
 
 RUN mkdir /mine
 
