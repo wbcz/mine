@@ -10,7 +10,8 @@
         "dev": "docker-compose down --volume && docker-compose up --build",
         "start": "npm run copy:posts && babel src/server -w -d build/server --no-babelrc --plugins=transform-runtime --presets=es2015,stage-3 & nodemon --watch build --delay 2 build/server/",
         "prod": "pm2 start src/server/index.js",
-        "deploy": "rsync -avP --exclude node_modules  ../mine/. root@173.82.95.202:/mine/"
+        "deploy": "rsync -avP --exclude node_modules  ../mine/. root@wbcz.me:/mine/",
+        "deploy1": "rsync -avP --exclude node_modules  ../mine/. root@173.82.95.202:/mine/"
     },
     "author": "",
     "license": "ISC",

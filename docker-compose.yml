@@ -8,10 +8,27 @@ services:
     image: blog
     volumes:
       - .:/mine
+      - /mine/node_modules
     ports:
       - "3000:3000"
     depends_on:
       - db
+  
+  nginx:
+    restart: always
+    image: nginx:alpine
+    container_name: nginx
+    depends_on:
+      - node
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./config/nginx/:/etc/nginx/conf.d
+      - ./log:/var/log/nginx
+      - ./:/mine
+      - ./config/crt/:/etc/letsencrypt
+      - .:/mine
       
   db:
     image: mongo
